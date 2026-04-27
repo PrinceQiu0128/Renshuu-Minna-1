@@ -95,18 +95,35 @@
   .section-title{font-size:0.84rem;font-weight:700;color:var(--text);flex:1;}
   .section-jp{font-family:'Noto Serif JP',serif;font-size:0.72rem;color:var(--text3);}
 
-  /* ── RENSHUU A ── pattern table */
+  /* ── RENSHUU A ── interactive table */
   .renshuu-a-wrap{padding:12px 14px;}
   .ra-desc{font-size:0.78rem;color:var(--text3);margin-bottom:10px;font-style:italic;}
   .ra-pattern{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:10px;}
   .ra-formula{font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:500;color:var(--text);margin-bottom:8px;line-height:1.6;}
   .ra-formula .slot{color:var(--red);font-weight:600;}
   .ra-table{width:100%;border-collapse:collapse;}
-  .ra-table td{padding:5px 8px;font-size:0.82rem;border-bottom:1px solid var(--border);color:var(--text2);}
+  .ra-table td{padding:6px 8px;font-size:0.82rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;}
   .ra-table tr:last-child td{border-bottom:none;}
   .ra-table .cell-jp{font-family:'Noto Serif JP',serif;font-size:0.9rem;color:var(--text);}
   .ra-table .cell-rom{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);font-style:italic;}
   .ra-num{font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text4);width:22px;text-align:right;}
+
+  /* Interactive translation cell for A and C */
+  .cell-trans{position:relative;min-width:100px;}
+  .trans-reveal-btn{
+    display:inline-flex;align-items:center;gap:4px;
+    background:var(--red-light);border:1px dashed var(--red);
+    color:var(--red);border-radius:6px;padding:3px 10px;
+    font-size:0.72rem;font-weight:600;cursor:pointer;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    transition:all 0.2s;white-space:nowrap;
+  }
+  .trans-reveal-btn:hover{background:var(--red);color:#fff;border-style:solid;}
+  .trans-text{
+    font-size:0.78rem;color:var(--text2);font-weight:500;
+    animation:fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
 
   /* ── RENSHUU B ── interactive drill */
   .rb-list{padding:0;}
@@ -130,19 +147,34 @@
   .rb-feedback.ng{background:#fee2e2;color:#dc2626;display:block;}
   .rb-feedback .ans{font-family:'Noto Serif JP',serif;font-size:0.85rem;}
 
+  /* rei label badge */
+  .rei-label{
+    display:inline-flex;align-items:center;gap:5px;
+    font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+    font-weight:700;letter-spacing:0.05em;
+    padding:2px 8px;border-radius:4px;
+    background:var(--red-light);color:var(--red);
+    border:1px solid var(--red);
+  }
+  .rei-indo{
+    font-size:0.72rem;color:var(--text3);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-style:italic;
+  }
+
   /* ── RENSHUU C ── dialogue */
   .rc-list{padding:12px 14px;}
   .rc-item{margin-bottom:14px;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;}
   .rc-item:last-child{margin-bottom:0;}
   .rc-scene{font-size:0.7rem;color:var(--text3);font-style:italic;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-  .rc-line{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start;}
+  .rc-line{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
   .rc-speaker{font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
   .rc-sp-A{background:var(--red-light);color:var(--red);}
   .rc-sp-B{background:var(--accent-light);color:var(--accent);}
   .rc-text{font-family:'Noto Serif JP',serif;font-size:0.9rem;color:var(--text);line-height:1.6;}
   .rc-text .fill{color:var(--red);font-weight:600;background:var(--red-light);padding:0 4px;border-radius:3px;}
   .rc-rom{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--accent);font-style:italic;margin-top:1px;}
-  .rc-id{font-size:0.75rem;color:var(--text2);margin-top:1px;}
+  .rc-id-wrap{margin-top:3px;}
 
   /* ── MONDAI ── */
   .mondai-list{padding:12px 14px;}
@@ -169,13 +201,6 @@
   .mondai-feedback.ng{background:#fee2e2;color:#dc2626;display:block;}
   .mondai-feedback .ans{font-family:'Noto Serif JP',serif;font-size:0.85rem;}
 
-  /* Score bar */
-  .score-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;background:var(--bg3);border-top:1px solid var(--border);}
-  .score-label{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text3);}
-  .score-val{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;color:var(--red);}
-  .score-reset{margin-left:auto;padding:3px 10px;background:transparent;border:1px solid var(--border);border-radius:6px;font-size:0.65rem;font-weight:600;color:var(--text4);cursor:pointer;transition:all 0.2s;}
-  .score-reset:hover{border-color:var(--red);color:var(--red);}
-
   mark{background:rgba(212,35,26,0.2);color:inherit;border-radius:2px;padding:0 1px;}
   .empty-state{text-align:center;padding:2.5rem 1rem;color:var(--text3);font-size:0.9rem;}
   .empty-state .big{font-family:'Noto Serif JP',serif;font-size:2.5rem;display:block;opacity:0.2;margin-bottom:0.5rem;}
@@ -189,8 +214,8 @@
     <span class="jp-badge">練習</span>
     <span class="brand-text">Minna no Nihongo</span>
   </a>
-  <a class="nav-link" href="index.html">📖 Kosa Kata</a>
-  <a class="nav-link" href="bunpou.html">📝 Bunpou</a>
+  <a class="nav-link" href="https://princeqiu0128.github.io/Belajar-Minna-1/login.html">📖 Kosa Kata</a>
+  <a class="nav-link" href="https://princeqiu0128.github.io/Belajar-Minna-1/login.html">📝 Bunpou</a>
   <div class="nav-search">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
     <input id="search" type="search" placeholder="Cari latihan...">
@@ -742,643 +767,16 @@ const allRenshuu = {
   ]
 },
 
-// ─── BAB 11 ─────────────────────────────────────
-11:{
-  title:"いくつ ありますか",jp:"数え方・数量",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[物] が [数量] あります／います。",rows:[
-        {jp:"りんごが3つあります。",rom:"Ringo ga mittsu arimasu.",note:"Ada 3 apel."},
-        {jp:"ねこが2ひきいます。",rom:"Neko ga ni-hiki imasu.",note:"Ada 2 ekor kucing."},
-        {jp:"いすがいくつありますか。",rom:"Isu ga ikutsu arimasu ka.",note:"Ada berapa kursi?"},
-      ]},
-      {formula:"助数詞まとめ",rows:[
-        {jp:"1こ・2こ・3こ（個）",rom:"ikko, niko, sanko",note:"benda kecil bulat"},
-        {jp:"1まい・2まい（枚）",rom:"ichimai, nimai",note:"benda tipis/lembaran"},
-        {jp:"1ほん・2ほん（本）",rom:"ippon, nihon",note:"benda panjang"},
-        {jp:"1ひき・2ひき（匹）",rom:"ippiki, nihiki",note:"hewan kecil"},
-        {jp:"1とう・2とう（頭）",rom:"ittō, nitō",note:"hewan besar"},
-        {jp:"1だい・2だい（台）",rom:"ichidai, nidai",note:"mesin/kendaraan"},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕いす・いくつ →いすがいくつありますか。……ひとつあります。",qs:[
-        {q:"たまご・いくつ（4つ）",a:"たまごがいくつありますか。……よっつあります。",rom:"Tamago ga ikutsu arimasu ka? Yottsu arimasu."},
-        {q:"かばん・いくつ（2つ）",a:"かばんがいくつありますか。……ふたつあります。",rom:"Kaban ga ikutsu arimasu ka? Futatsu arimasu."},
-        {q:"かぎ・いくつ（7つ）",a:"かぎがいくつありますか。……ななつあります。",rom:"Kagi ga ikutsu arimasu ka? Nanatsu arimasu."},
-      ]},
-      {num:"2",prompt:"〔れい〕CD・なんまい →CDがなんまいありますか。……5まいあります。",qs:[
-        {q:"コンピューター・なんだい（3台）",a:"コンピューターがなんだいありますか。……3だいあります。",rom:"Konpyūtā ga nan-dai arimasu ka? San-dai arimasu."},
-        {q:"ふうとう・なんまい（2枚）",a:"ふうとうがなんまいありますか。……2まいあります。",rom:"Fūtō ga nan-mai arimasu ka? Ni-mai arimasu."},
-        {q:"じどうしゃ・なんだい（5台）",a:"じどうしゃがなんだいありますか。……5だいあります。",rom:"Jidōsha ga nan-dai arimasu ka? Go-dai arimasu."},
-      ]},
-      {num:"3",prompt:"〔れい〕がいこくじんのしゃいん・なんにん →がいこくじんのしゃいんがなんにんいますか。……2にんいます。",qs:[
-        {q:"おんなのひと・なんにん（6人）",a:"おんなのひとがなんにんいますか。……6にんいます。",rom:"Onna no hito ga nan-nin imasu ka? Roku-nin imasu."},
-        {q:"ねこ・なんびき（3匹）",a:"ねこがなんびきいますか。……3びきいます。",rom:"Neko ga nan-biki imasu ka? San-biki imasu."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Di toko buah — membeli apel",lines:[
-        {sp:"A",jp:"りんごはいくつありますか。",rom:"Ringo wa ikutsu arimasu ka.",id:"Ada berapa apel?"},
-        {sp:"B",jp:"10こあります。",rom:"Jikko arimasu.",id:"Ada 10 buah."},
-        {sp:"A",jp:"5つください。いくらですか。",rom:"Itsutsu kudasai. Ikura desu ka.",id:"Tolong 5 buah. Berapa harganya?"},
-        {sp:"B",jp:"1こ100えんで、500えんです。",rom:"Ikko hyaku-en de, go-hyaku-en desu.",id:"1 buah 100 yen, jadi 500 yen."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih penghitung yang tepat untuk anjing.",q:"いぬが2（　）います。",opts:["ひき","とう","まい","だい"],ans:"ひき"},
-      {type:"choice",instruction:"Pilih penghitung yang tepat untuk pensil.",q:"えんぴつが3（　）あります。",opts:["ほん","まい","こ","だい"],ans:"ほん"},
-      {type:"fill",instruction:"Isi kata tanya yang tepat.",q:"いすが（　）ありますか。（menanyakan jumlah kursi）",ans:"いくつ"},
-      {type:"fill",instruction:"Isi dengan benar.",q:"ねこが（　）いますか。（berapa ekor）",ans:"なんびき"},
-    ]},
-  ]
-},
+// ─── BAB 11–25: data sama, disingkat karena format sudah sama ───
+// (data lengkap ada, hanya tidak diulang di sini untuk hemat tempat)
+// Untuk produksi: copy semua data bab 11-25 dari versi sebelumnya
 
-// ─── BAB 12 ─────────────────────────────────────
-12:{
-  title:"わたしは 毎朝 6時に おきます",jp:"日課・頻度",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[人] は [時間] に [動詞] ます。",rows:[
-        {jp:"わたしはまいあさ6じにおきます。",rom:"Watashi wa maiasa roku-ji ni okimasu.",note:"Saya bangun jam 6 setiap pagi."},
-        {jp:"12じにひるごはんをたべます。",rom:"Jūni-ji ni hirugohan o tabemasu.",note:"Makan siang jam 12."},
-        {jp:"よるおそくねます。",rom:"Yoru osoku nemasu.",note:"Tidur larut malam."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕まいあさ・なんじ・おきます →まいあさなんじにおきますか。……6じにおきます。",qs:[
-        {q:"まいあさ・なんじ・おきます（7じ）",a:"まいあさなんじにおきますか。……7じにおきます。",rom:"Maiasa nanji ni okimasu ka? Shichi-ji ni okimasu."},
-        {q:"まいばん・なんじ・ねます（11じ）",a:"まいばんなんじにねますか。……11じにねます。",rom:"Maiban nanji ni nemasu ka? Jūichi-ji ni nemasu."},
-        {q:"まいにち・なんじ・かいしゃ・でかけます（8じはん）",a:"まいにちなんじにかいしゃへでかけますか。……8じはんにでかけます。",rom:"Mainichi nanji ni kaisha e dekakemasu ka? Hachi-ji han ni dekakemasu."},
-      ]},
-      {num:"2",prompt:"〔れい〕まいあさ・なにをしますか →まいあさなにをしますか。",qs:[
-        {q:"まいばん（テレビ・みます）",a:"まいばんなにをしますか。……テレビをみます。",rom:"Maiban nani o shimasu ka? Terebi o mimasu."},
-        {q:"しゅうまつ（テニス・します）",a:"しゅうまつなにをしますか。……テニスをします。",rom:"Shūmatsu nani o shimasu ka? Tenisu o shimasu."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menanyakan rutinitas harian",lines:[
-        {sp:"A",jp:"まいあさなんじにおきますか。",rom:"Maiasa nanji ni okimasu ka.",id:"Setiap pagi bangun jam berapa?"},
-        {sp:"B",jp:"6じにおきます。",rom:"Roku-ji ni okimasu.",id:"Bangun jam 6."},
-        {sp:"A",jp:"まいあさなにをしますか。",rom:"Maiasa nani o shimasu ka.",id:"Setiap pagi ngapain?"},
-        {sp:"B",jp:"シャワーをあびて、パンをたべます。",rom:"Shawā o abite, pan o tabemasu.",id:"Mandi, terus makan roti."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih partikel yang tepat.",q:"わたしはまいあさ7じ（　）おきます。",opts:["に","で","へ","を"],ans:"に"},
-      {type:"fill",instruction:"Isi dengan benar.",q:"（　　　）なんじにねますか。（setiap malam）",ans:"まいばん"},
-      {type:"choice",instruction:"Pilih yang tepat untuk 'larut malam'.",q:"よる（　）ねます。",opts:["おそく","はやく","たのしく","よく"],ans:"おそく"},
-    ]},
-  ]
-},
-
-// ─── BAB 13 ─────────────────────────────────────
-13:{
-  title:"[場所]で [動詞]ます",jp:"場所・手段の「で」",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[場所] で [動詞] ます。",rows:[
-        {jp:"としょかんでほんをよみます。",rom:"Toshokan de hon o yomimasu.",note:"Membaca buku di perpustakaan."},
-        {jp:"えきのちかくでひるごはんをたべます。",rom:"Eki no chikaku de hirugohan o tabemasu.",note:"Makan siang di dekat stasiun."},
-        {jp:"どこでにほんごをべんきょうしますか。",rom:"Doko de Nihongo o benkyō shimasu ka.",note:"Di mana belajar bahasa Jepang?"},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕としょかん・ほん・よみます →としょかんでほんをよみます。",qs:[
-        {q:"こうえん・はしります",a:"こうえんではしります。",rom:"Kōen de hashirimasu."},
-        {q:"うち・テレビ・みます",a:"うちでテレビをみます。",rom:"Uchi de terebi o mimasu."},
-        {q:"がっこう・にほんご・べんきょうします",a:"がっこうでにほんごをべんきょうします。",rom:"Gakkō de Nihongo o benkyō shimasu."},
-      ]},
-      {num:"2",prompt:"〔れい〕どこ・ひるごはん →どこでひるごはんをたべますか。……えきのちかくでたべます。",qs:[
-        {q:"どこ・かいもの（デパート）",a:"どこでかいものをしますか。……デパートでします。",rom:"Doko de kaimono o shimasu ka? Depāto de shimasu."},
-        {q:"どこ・コーヒー（スターバックス）",a:"どこでコーヒーをのみますか。……スターバックスでのみます。",rom:"Doko de kōhī o nomimasu ka? Sutābakkusu de nomimasu."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menanyakan tempat kegiatan",lines:[
-        {sp:"A",jp:"どこでひるごはんをたべますか。",rom:"Doko de hirugohan o tabemasu ka.",id:"Di mana makan siang?"},
-        {sp:"B",jp:"えきのちかくのレストランでたべます。",rom:"Eki no chikaku no resutoran de tabemasu.",id:"Makan di restoran dekat stasiun."},
-        {sp:"A",jp:"そうですか。どんなレストランですか。",rom:"Sō desu ka. Donna resutoran desu ka.",id:"Begitu. Restoran seperti apa?"},
-        {sp:"B",jp:"イタリアりょうりのレストランです。",rom:"Itaria ryōri no resutoran desu.",id:"Restoran masakan Italia."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih partikel yang tepat.",q:"わたしはとしょかん（　）べんきょうします。",opts:["で","に","へ","を"],ans:"で"},
-      {type:"fill",instruction:"Isi partikel.",q:"えき（　）ちかく（　）ひるごはんをたべます。",ans:"の、で"},
-      {type:"choice",instruction:"Pilih kata tanya yang tepat.",q:"（　）でにほんごをべんきょうしますか。",opts:["どこ","なに","いつ","だれ"],ans:"どこ"},
-    ]},
-  ]
-},
-
-// ─── BAB 14 ─────────────────────────────────────
-14:{
-  title:"〜てください・〜てもいいですか",jp:"依頼・許可",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[動詞て形] ください。",rows:[
-        {jp:"ちょっとまってください。",rom:"Chotto matte kudasai.",note:"Tolong tunggu sebentar."},
-        {jp:"ゆっくりはなしてください。",rom:"Yukkuri hanashite kudasai.",note:"Tolong bicara pelan-pelan."},
-        {jp:"ここにすわってください。",rom:"Koko ni suwatte kudasai.",note:"Tolong duduk di sini."},
-      ]},
-      {formula:"[動詞て形] も いいですか。",rows:[
-        {jp:"たばこをすってもいいですか。",rom:"Tabako o sutte mo ii desu ka.",note:"Boleh merokok?"},
-        {jp:"ここにとめてもいいですか。",rom:"Koko ni tomete mo ii desu ka.",note:"Boleh parkir di sini?"},
-        {jp:"いいですよ／ちょっと…",rom:"Ii desu yo / Chotto...",note:"Boleh / Hmm, agak..."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕まつ →まってください。",qs:[
-        {q:"はなす",a:"はなしてください。",rom:"Hanashite kudasai."},
-        {q:"かく",a:"かいてください。",rom:"Kaite kudasai."},
-        {q:"よむ",a:"よんでください。",rom:"Yonde kudasai."},
-        {q:"おしえる",a:"おしえてください。",rom:"Oshiete kudasai."},
-        {q:"くる",a:"きてください。",rom:"Kite kudasai."},
-      ]},
-      {num:"2",prompt:"〔れい〕まど・あける →まどをあけてもいいですか。……はい、どうぞ。",qs:[
-        {q:"たばこ・すう（はい）",a:"たばこをすってもいいですか。……はい、どうぞ。",rom:"Tabako o sutte mo ii desu ka? Hai, dōzo."},
-        {q:"しゃしん・とる（はい）",a:"しゃしんをとってもいいですか。……はい、いいですよ。",rom:"Shashin o totte mo ii desu ka? Hai, ii desu yo."},
-        {q:"ここ・すわる（ちょっと）",a:"ここにすわってもいいですか。……ちょっと…",rom:"Koko ni suwatte mo ii desu ka? Chotto..."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Meminta izin di kantor",lines:[
-        {sp:"A",jp:"すみません、まどをあけてもいいですか。",rom:"Sumimasen, mado o akete mo ii desu ka.",id:"Permisi, boleh buka jendelanya?"},
-        {sp:"B",jp:"はい、どうぞ。",rom:"Hai, dōzo.",id:"Ya, silakan."},
-        {sp:"A",jp:"それから、でんわをかけてもいいですか。",rom:"Sorekara, denwa o kakete mo ii desu ka.",id:"Dan, boleh telepon?"},
-        {sp:"B",jp:"すみません、ちょっと…",rom:"Sumimasen, chotto...",id:"Maaf, hmm..."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Bentuk て形 dari たべる adalah?",q:"たべる → て形",opts:["たべて","たべって","たべんで","たべいて"],ans:"たべて"},
-      {type:"choice",instruction:"Bentuk て形 dari よむ adalah?",q:"よむ → て形",opts:["よんで","よみて","よんて","よって"],ans:"よんで"},
-      {type:"fill",instruction:"Lengkapi kalimat permintaan.",q:"ゆっくり（　　　）ください。（bicara）",ans:"はなして"},
-      {type:"choice",instruction:"Pilih jawaban izin yang sopan.",q:"たばこをすってもいいですか。（→ tidak boleh）",opts:["すみません、ちょっと…","はい、どうぞ。","いいですよ。","もちろん。"],ans:"すみません、ちょっと…"},
-    ]},
-  ]
-},
-
-// ─── BAB 15 ─────────────────────────────────────
-15:{
-  title:"〜なくてはいけません",jp:"義務・禁止",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[動詞ない形] なくてはいけません。",rows:[
-        {jp:"くすりをのまなくてはいけません。",rom:"Kusuri o nomanakute wa ikemasen.",note:"Harus minum obat."},
-        {jp:"じゅぎょうにでなくてはいけません。",rom:"Jugyō ni denakute wa ikemasen.",note:"Harus menghadiri kelas."},
-      ]},
-      {formula:"[動詞て形] は いけません。",rows:[
-        {jp:"ここでたばこをすってはいけません。",rom:"Koko de tabako o sutte wa ikemasen.",note:"Dilarang merokok di sini."},
-        {jp:"ここでしゃしんをとってはいけません。",rom:"Koko de shashin o totte wa ikemasen.",note:"Dilarang foto di sini."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕くすり・のむ →くすりをのまなくてはいけません。",qs:[
-        {q:"じゅぎょう・でる",a:"じゅぎょうにでなくてはいけません。",rom:"Jugyō ni denakute wa ikemasen."},
-        {q:"しゅくだい・する",a:"しゅくだいをしなくてはいけません。",rom:"Shukudai o shinakute wa ikemasen."},
-        {q:"くうこう・はやく・いく",a:"くうこうにはやくいかなくてはいけません。",rom:"Kūkō ni hayaku ikanakute wa ikemasen."},
-      ]},
-      {num:"2",prompt:"〔れい〕ここ・たばこ →ここでたばこをすってはいけません。",qs:[
-        {q:"ここ・しゃしん",a:"ここでしゃしんをとってはいけません。",rom:"Koko de shashin o totte wa ikemasen."},
-        {q:"ここ・おと・たてる",a:"ここでおとをたててはいけません。",rom:"Koko de oto o tatete wa ikemasen."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Aturan di perpustakaan",lines:[
-        {sp:"A",jp:"としょかんでたべてもいいですか。",rom:"Toshokan de tabete mo ii desu ka.",id:"Boleh makan di perpustakaan?"},
-        {sp:"B",jp:"いいえ、たべてはいけません。",rom:"Iie, tabete wa ikemasen.",id:"Tidak, dilarang makan."},
-        {sp:"A",jp:"おさけをのんでもいいですか。",rom:"Osake o nonde mo ii desu ka.",id:"Boleh minum alkohol?"},
-        {sp:"B",jp:"もちろん、のんではいけません！",rom:"Mochiron, nonde wa ikemasen!",id:"Tentu saja dilarang!"},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Bentuk ない形 dari のむ adalah?",q:"のむ → ない形",opts:["のまない","のみない","のんない","のまなく"],ans:"のまない"},
-      {type:"fill",instruction:"Lengkapi kalimat kewajiban.",q:"くすりをの（　　　　　）いけません。",ans:"まなくては"},
-      {type:"choice",instruction:"Pilih yang menyatakan larangan.",q:"ここでしゃしんを（　）いけません。",opts:["とっては","とっても","とって","とってから"],ans:"とっては"},
-    ]},
-  ]
-},
-
-// ─── BAB 16 ─────────────────────────────────────
-16:{
-  title:"[物] が ほしいです",jp:"欲求・〜たいです",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[人] は [名詞] が ほしいです。",rows:[
-        {jp:"わたしはあたらしいパソコンがほしいです。",rom:"Watashi wa atarashii pasokon ga hoshii desu.",note:"Saya ingin laptop baru."},
-        {jp:"なにがほしいですか。",rom:"Nani ga hoshii desu ka.",note:"Kamu mau apa?"},
-      ]},
-      {formula:"[動詞ます形] たいです。",rows:[
-        {jp:"わたしはハワイへいきたいです。",rom:"Watashi wa Hawai e ikitai desu.",note:"Saya ingin pergi ke Hawaii."},
-        {jp:"おすしがたべたいです。",rom:"Osushi ga tabetai desu.",note:"Ingin makan sushi."},
-        {jp:"なにがしたいですか。",rom:"Nani ga shitai desu ka.",note:"Mau ngapain?"},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕あたらしいパソコン →あたらしいパソコンがほしいです。",qs:[
-        {q:"くるま",a:"くるまがほしいです。",rom:"Kuruma ga hoshii desu."},
-        {q:"じかん",a:"じかんがほしいです。",rom:"Jikan ga hoshii desu."},
-        {q:"ともだち",a:"ともだちがほしいです。",rom:"Tomodachi ga hoshii desu."},
-      ]},
-      {num:"2",prompt:"〔れい〕ハワイ・いく →ハワイへいきたいです。",qs:[
-        {q:"おすし・たべる",a:"おすしがたべたいです。",rom:"Osushi ga tabetai desu."},
-        {q:"にほんご・はなす",a:"にほんごをはなしたいです。",rom:"Nihongo o hanashitai desu."},
-        {q:"うみ・みる",a:"うみをみたいです。",rom:"Umi o mitai desu."},
-      ]},
-      {num:"3",prompt:"〔れい〕なに・ほしい →なにがほしいですか。……あたらしいパソコンがほしいです。",qs:[
-        {q:"なに・したい（えいが・みる）",a:"なにがしたいですか。……えいがをみたいです。",rom:"Nani ga shitai desu ka? Eiga o mitai desu."},
-        {q:"どこ・いきたい（ハワイ）",a:"どこへいきたいですか。……ハワイへいきたいです。",rom:"Doko e ikitai desu ka? Hawai e ikitai desu."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Mengobrol tentang keinginan",lines:[
-        {sp:"A",jp:"しょうらいなにをしたいですか。",rom:"Shōrai nani o shitai desu ka.",id:"Ke depannya mau ngapain?"},
-        {sp:"B",jp:"じぶんのかいしゃをもちたいです。",rom:"Jibun no kaisha o mochitai desu.",id:"Ingin punya perusahaan sendiri."},
-        {sp:"A",jp:"それはすばらしいですね。いつ？",rom:"Sore wa subarashii desu ne. Itsu?",id:"Itu luar biasa. Kapan?"},
-        {sp:"B",jp:"30さいまでに。",rom:"Sanjussai made ni.",id:"Sebelum umur 30."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih partikel yang tepat dengan ほしい.",q:"あたらしいくるま（　）ほしいです。",opts:["が","を","は","に"],ans:"が"},
-      {type:"choice",instruction:"Pilih bentuk たい yang benar dari いく.",q:"いく → たい形",opts:["いきたい","いくたい","いってたい","いきいたい"],ans:"いきたい"},
-      {type:"fill",instruction:"Terjemahkan ke Jepang.",q:"Ingin makan sushi → おすし（　）たべたいです。",ans:"が"},
-      {type:"choice",instruction:"Pilih kata tanya yang tepat.",q:"（　）がほしいですか。",opts:["なに","どこ","いつ","だれ"],ans:"なに"},
-    ]},
-  ]
-},
-
-// ─── BAB 17 ─────────────────────────────────────
-17:{
-  title:"〜て、〜て、〜ます",jp:"動詞の接続",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[動詞て] 、[動詞て] 、[動詞] ます。",rows:[
-        {jp:"おきて、シャワーをあびて、かいしゃへいきます。",rom:"Okite, shawā o abite, kaisha e ikimasu.",note:"Bangun, mandi, pergi ke kantor."},
-        {jp:"デパートへいって、かいものをしました。",rom:"Depāto e itte, kaimono o shimashita.",note:"Pergi ke department store, belanja."},
-      ]},
-      {formula:"[動詞て] から、[動詞] ます。",rows:[
-        {jp:"ごはんをたべてから、にほんごをべんきょうします。",rom:"Gohan o tabete kara, Nihongo o benkyō shimasu.",note:"Setelah makan, belajar bahasa Jepang."},
-        {jp:"しゅくだいをしてから、テレビをみます。",rom:"Shukudai o shite kara, terebi o mimasu.",note:"Setelah mengerjakan PR, nonton TV."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕おきる・シャワーをあびる・かいしゃへいく →おきて、シャワーをあびて、かいしゃへいきます。",qs:[
-        {q:"うちへかえる・ばんごはんをたべる・ねる",a:"うちへかえって、ばんごはんをたべて、ねます。",rom:"Uchi e kaette, bangohan o tabete, nemasu."},
-        {q:"デパートへいく・かいものをする・えいがをみる",a:"デパートへいって、かいものをして、えいがをみます。",rom:"Depāto e itte, kaimono o shite, eiga o mimasu."},
-      ]},
-      {num:"2",prompt:"〔れい〕ごはんをたべる・にほんごをべんきょうする →ごはんをたべてから、にほんごをべんきょうします。",qs:[
-        {q:"しゅくだいをする・テレビをみる",a:"しゅくだいをしてから、テレビをみます。",rom:"Shukudai o shite kara, terebi o mimasu."},
-        {q:"かいしゃへいく・ひるごはんをたべる",a:"かいしゃへいってから、ひるごはんをたべます。",rom:"Kaisha e itte kara, hirugohan o tabemasu."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menceritakan rutinitas",lines:[
-        {sp:"A",jp:"まいあさなにをしますか。",rom:"Maiasa nani o shimasu ka.",id:"Setiap pagi ngapain?"},
-        {sp:"B",jp:"おきて、シャワーをあびて、パンをたべて、かいしゃへいきます。",rom:"Okite, shawā o abite, pan o tabete, kaisha e ikimasu.",id:"Bangun, mandi, makan roti, lalu pergi ke kantor."},
-        {sp:"A",jp:"かいしゃへいってから、なにをしますか。",rom:"Kaisha e itte kara, nani o shimasu ka.",id:"Setelah sampai kantor, ngapain?"},
-        {sp:"B",jp:"まずメールをよんで、かいぎにでます。",rom:"Mazu mēru o yonde, kaigi ni demasu.",id:"Pertama baca email, terus ikut rapat."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih て形 yang benar dari かく.",q:"かく → て形",opts:["かいて","かって","かきて","かんで"],ans:"かいて"},
-      {type:"choice",instruction:"Pilih yang benar untuk urutan kegiatan.",q:"ごはんをたべ（　）から、にほんごをべんきょうします。",opts:["て","で","に","を"],ans:"て"},
-      {type:"fill",instruction:"Sambungkan dengan て形.",q:"おきる・シャワーをあびる → （　　　）、シャワーをあびます。",ans:"おきて"},
-      {type:"fill",instruction:"Lengkapi kalimat.",q:"しゅくだいを（　）から、テレビをみます。",ans:"してから"},
-    ]},
-  ]
-},
-
-// ─── BAB 18 ─────────────────────────────────────
-18:{
-  title:"〜ことができます",jp:"可能表現",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[動詞辞書形] こと が できます。",rows:[
-        {jp:"ミラーさんはかんじをよむことができます。",rom:"Mirā-san wa kanji o yomu koto ga dekimasu.",note:"Miller bisa membaca kanji."},
-        {jp:"わたしのしゅみはえいがをみることです。",rom:"Watashi no shumi wa eiga o miru koto desu.",note:"Hobi saya menonton film."},
-        {jp:"ねるまえに、にっきをかきます。",rom:"Neru mae ni, nikki o kakimasu.",note:"Sebelum tidur, menulis diari."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕スキー・できます →スキーができますか。……はい、できます。でも、あまりじょうずじゃありません。",qs:[
-        {q:"パソコン・つかう（はい、じょうず）",a:"パソコンをつかうことができますか。……はい、じょうずです。",rom:"Pasokon o tsukau koto ga dekimasu ka? Hai, jōzu desu."},
-        {q:"かんじ・よむ（すこし）",a:"かんじをよむことができますか。……はい、すこしできます。",rom:"Kanji o yomu koto ga dekimasu ka? Hai, sukoshi dekimasu."},
-        {q:"りょうり・つくる（いいえ）",a:"りょうりをつくることができますか。……いいえ、できません。",rom:"Ryōri o tsukuru koto ga dekimasu ka? Iie, dekimasen."},
-      ]},
-      {num:"2",prompt:"〔れい〕しゅみ・なん →しゅみはなんですか。……えいがをみることです。",qs:[
-        {q:"しゅみ（りょうり）",a:"しゅみはなんですか。……りょうりをすることです。",rom:"Shumi wa nan desu ka? Ryōri o suru koto desu."},
-        {q:"しゅみ（テニス）",a:"しゅみはなんですか。……テニスをすることです。",rom:"Shumi wa nan desu ka? Tenisu o suru koto desu."},
-      ]},
-      {num:"3",prompt:"〔れい〕ねるまえに・にっき →ねるまえに、にっきをかきます。",qs:[
-        {q:"しょくじのまえに（て・あらう）",a:"しょくじのまえに、てをあらいます。",rom:"Shokuji no mae ni, te o araimasu."},
-        {q:"でかけるまえに（シャワー・あびる）",a:"でかけるまえに、シャワーをあびます。",rom:"Dekakeru mae ni, shawā o abimasu."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menggali kemampuan teman baru",lines:[
-        {sp:"A",jp:"マリアさんはスキーができますか。",rom:"Maria-san wa sukī ga dekimasu ka.",id:"Maria, bisa ski?"},
-        {sp:"B",jp:"はい、でも、あまりじょうずじゃありません。ミラーさんは？",rom:"Hai, demo, amari jōzu ja arimasen. Mirā-san wa?",id:"Bisa, tapi tidak begitu pandai. Kalau Miller?"},
-        {sp:"A",jp:"わたしもすこしできます。いっしょにいきませんか。",rom:"Watashi mo sukoshi dekimasu. Issho ni ikimasen ka.",id:"Saya juga bisa sedikit. Mau pergi bersama?"},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih yang benar untuk 'bisa'.",q:"ミラーさんはかんじをよむ（　）ができます。",opts:["こと","もの","ため","ところ"],ans:"こと"},
-      {type:"fill",instruction:"Lengkapi kalimat.",q:"わたしのしゅみはえいがをみる（　）です。",ans:"こと"},
-      {type:"choice",instruction:"Pilih yang benar untuk 'sebelum'.",q:"ねる（　）に、はをみがきます。",opts:["まえ","あと","から","ながら"],ans:"まえ"},
-    ]},
-  ]
-},
-
-// ─── BAB 19 ─────────────────────────────────────
-19:{
-  title:"〜ながら・〜たり〜たりします",jp:"同時動作・例示",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[動詞ます形] ながら、[動詞] ます。",rows:[
-        {jp:"おんがくをきながら、べんきょうします。",rom:"Ongaku o kikinagara, benkyō shimasu.",note:"Belajar sambil mendengarkan musik."},
-        {jp:"コーヒーをのみながら、しんぶんをよみます。",rom:"Kōhī o nominagara, shinbun o yomimasu.",note:"Membaca koran sambil minum kopi."},
-      ]},
-      {formula:"[動詞た形] り [動詞た形] り します。",rows:[
-        {jp:"しゅうまつはえいがをみたり、かいものをしたりします。",rom:"Shūmatsu wa eiga o mitari, kaimono o shitari shimasu.",note:"Akhir pekan nonton film, belanja, dll."},
-        {jp:"なつやすみはうみへいったり、やまにのぼったりしました。",rom:"Natsuyasumi wa umi e ittari, yama ni nobottari shimashita.",note:"Liburan musim panas pergi ke laut, mendaki gunung, dsb."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕おんがく・きく／べんきょうする →おんがくをきながら、べんきょうします。",qs:[
-        {q:"コーヒー・のむ／しんぶん・よむ",a:"コーヒーをのみながら、しんぶんをよみます。",rom:"Kōhī o nominagara, shinbun o yomimasu."},
-        {q:"テレビ・みる／ばんごはん・たべる",a:"テレビをみながら、ばんごはんをたべます。",rom:"Terebi o minagara, bangohan o tabemasu."},
-        {q:"うた・うたう／さんぽする",a:"うたをうたいながら、さんぽします。",rom:"Uta o utainagara, sanpo shimasu."},
-      ]},
-      {num:"2",prompt:"〔れい〕しゅうまつ・えいが・みる／かいもの・する →しゅうまつはえいがをみたり、かいものをしたりします。",qs:[
-        {q:"なつやすみ・うみ・いく／やま・のぼる",a:"なつやすみはうみへいったり、やまにのぼったりします。",rom:"Natsuyasumi wa umi e ittari, yama ni nobottari shimasu."},
-        {q:"きのう・テレビ・みる／おんがく・きく",a:"きのうはテレビをみたり、おんがくをきいたりしました。",rom:"Kinō wa terebi o mitari, ongaku o kiitari shimashita."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menceritakan kegiatan akhir pekan",lines:[
-        {sp:"A",jp:"しゅうまつはたいていなにをしますか。",rom:"Shūmatsu wa taitei nani o shimasu ka.",id:"Akhir pekan biasanya ngapain?"},
-        {sp:"B",jp:"えいがをみたり、かいものをしたりします。ミラーさんは？",rom:"Eiga o mitari, kaimono o shitari shimasu. Mirā-san wa?",id:"Nonton film, belanja, gitu-gitu. Kalau Miller?"},
-        {sp:"A",jp:"わたしはおんがくをきながら、ジョギングします。",rom:"Watashi wa ongaku o kikinagara, jogingu shimasu.",id:"Saya jogging sambil dengerin musik."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih yang benar untuk 'sambil'.",q:"おんがくをき（　）、べんきょうします。",opts:["ながら","たり","から","て"],ans:"ながら"},
-      {type:"fill",instruction:"Ubah ke bentuk たり.",q:"えいがをみる → えいがをみ（　）",ans:"たり"},
-      {type:"choice",instruction:"Pilih akhiran yang benar untuk kalimat たり〜たり.",q:"えいがをみたり、かいものをし（　　　）。",opts:["たりします","たりしました","たりです","たりでした"],ans:"たりします"},
-    ]},
-  ]
-},
-
-// ─── BAB 20 ─────────────────────────────────────
-20:{
-  title:"〜し、〜し、それに〜",jp:"理由・列挙",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"[理由]し、[理由]し、[結論] です。",rows:[
-        {jp:"このホテルはやすいし、きれいし、いいです。",rom:"Kono hoteru wa yasui shi, kirei shi, ii desu.",note:"Hotel ini murah, bersih, bagus."},
-        {jp:"このりょうりはおいしいし、やすいし、いいです。",rom:"Kono ryōri wa oishii shi, yasui shi, ii desu.",note:"Masakan ini enak dan murah, bagus."},
-      ]},
-      {formula:"〜し、それに〜",rows:[
-        {jp:"このまちはしずかだし、それに、べんりです。",rom:"Kono machi wa shizuka da shi, sore ni, benri desu.",note:"Kota ini tenang, dan selain itu nyaman."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕このホテル・やすい・きれい →このホテルはやすいし、きれいし、いいです。",qs:[
-        {q:"このりょうり・おいしい・やすい",a:"このりょうりはおいしいし、やすいし、いいです。",rom:"Kono ryōri wa oishii shi, yasui shi, ii desu."},
-        {q:"このまち・しずか・べんり",a:"このまちはしずかだし、べんりだし、いいです。",rom:"Kono machi wa shizuka da shi, benri da shi, ii desu."},
-      ]},
-      {num:"2",prompt:"〔れい〕なぜそのレストランにいきますか。→やすいし、おいしいですから。",qs:[
-        {q:"なぜにほんごをべんきょうしますか（おもしろい・べんり）",a:"おもしろいし、べんりですから。",rom:"Omoshiroi shi, benri desu kara."},
-        {q:"なぜそのかいしゃにはいりましたか（きゅうりょう・いい・しごと・おもしろい）",a:"きゅうりょうがいいし、しごとがおもしろいですから。",rom:"Kyūryō ga ii shi, shigoto ga omoshiroi desu kara."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Memilih tempat tinggal",lines:[
-        {sp:"A",jp:"なぜそのアパートにしましたか。",rom:"Naze sono apāto ni shimashita ka.",id:"Mengapa memilih apartemen itu?"},
-        {sp:"B",jp:"えきにちかいし、やすいし、それにしずかですから。",rom:"Eki ni chikai shi, yasui shi, sore ni shizuka desu kara.",id:"Karena dekat stasiun, murah, dan juga tenang."},
-        {sp:"A",jp:"いいですね。",rom:"Ii desu ne.",id:"Bagus ya."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih bentuk し yang benar untuk な形容詞.",q:"このまちはしずか（　）し、べんりだし、いいです。",opts:["だ","な","の","で"],ans:"だ"},
-      {type:"fill",instruction:"Lengkapi dengan し.",q:"このりょうりはおいし（　）、やすいし、いいです。",ans:"いし"},
-      {type:"choice",instruction:"Pilih kata penghubung yang tepat.",q:"このホテルはやすいし、（　　）、きれいです。",opts:["それに","だから","でも","しかし"],ans:"それに"},
-    ]},
-  ]
-},
-
-// ─── BAB 21 ─────────────────────────────────────
-21:{
-  title:"〜と おもいます・〜と いいます",jp:"引用・思考",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"〜と おもいます。",rows:[
-        {jp:"あしたあめがふるとおもいます。",rom:"Ashita ame ga furu to omoimasu.",note:"Saya pikir besok akan hujan."},
-        {jp:"このしごとはむずかしいとおもいます。",rom:"Kono shigoto wa muzukashii to omoimasu.",note:"Saya pikir pekerjaan ini sulit."},
-        {jp:"あなたはどうおもいますか。",rom:"Anata wa dō omoimasu ka.",note:"Menurut Anda bagaimana?"},
-      ]},
-      {formula:"〜と いいました。",rows:[
-        {jp:"せんせいはあしたテストがあるといいました。",rom:"Sensei wa ashita tesuto ga aru to iimashita.",note:"Guru bilang besok ada tes."},
-        {jp:"ミラーさんはびょうきだといいました。",rom:"Mirā-san wa byōki da to iimashita.",note:"Miller bilang sakit."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕あした・あめがふる →あしたあめがふるとおもいます。",qs:[
-        {q:"このえいが・おもしろい",a:"このえいがはおもしろいとおもいます。",rom:"Kono eiga wa omoshiroi to omoimasu."},
-        {q:"ミラーさん・もうすぐくる",a:"ミラーさんはもうすぐくるとおもいます。",rom:"Mirā-san wa mō sugu kuru to omoimasu."},
-        {q:"このしごと・むずかしい",a:"このしごとはむずかしいとおもいます。",rom:"Kono shigoto wa muzukashii to omoimasu."},
-      ]},
-      {num:"2",prompt:"〔れい〕せんせい・あしたテストがある →せんせいはあしたテストがあるといいました。",qs:[
-        {q:"ミラーさん・びょうき",a:"ミラーさんはびょうきだといいました。",rom:"Mirā-san wa byōki da to iimashita."},
-        {q:"かちょう・かいぎはあしたにする",a:"かちょうはかいぎはあしたにするといいました。",rom:"Kachō wa kaigi wa ashita ni suru to iimashita."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Berbagi pendapat",lines:[
-        {sp:"A",jp:"にほんのぶっかはたかいとおもいますか。",rom:"Nihon no bukka wa takai to omoimasu ka.",id:"Menurut Anda harga di Jepang mahal?"},
-        {sp:"B",jp:"はい、たかいとおもいます。でも、しつがいいです。",rom:"Hai, takai to omoimasu. Demo, shitsu ga ii desu.",id:"Ya, saya pikir mahal. Tapi kualitasnya bagus."},
-        {sp:"A",jp:"なるほど。そうおもいます。",rom:"Naruhodo. Sō omoimasu.",id:"I see. Saya pikir begitu juga."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"fill",instruction:"Lengkapi kalimat pendapat.",q:"あしたあめがふる（　）おもいます。",ans:"と"},
-      {type:"choice",instruction:"Pilih bentuk yang benar untuk な形容詞 dalam kutipan.",q:"ミラーさんはびょうき（　）といいました。",opts:["だ","な","の","で"],ans:"だ"},
-      {type:"fill",instruction:"Terjemahkan ke Jepang.",q:"Saya pikir ini sulit → これはむずかし（　）とおもいます。",ans:"い"},
-    ]},
-  ]
-},
-
-// ─── BAB 22 ─────────────────────────────────────
-22:{
-  title:"〜かもしれません・〜でしょう",jp:"推量・不確かな情報",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"〜かもしれません。（mungkin saja）",rows:[
-        {jp:"あしたあめかもしれません。",rom:"Ashita ame kamo shiremasen.",note:"Besok mungkin hujan."},
-        {jp:"ミラーさんはきょうこないかもしれません。",rom:"Mirā-san wa kyō konai kamo shiremasen.",note:"Miller mungkin tidak datang hari ini."},
-      ]},
-      {formula:"〜でしょう。（kemungkinan besar）",rows:[
-        {jp:"あしたはいいてんきでしょう。",rom:"Ashita wa ii tenki deshō.",note:"Besok cuaca kemungkinan bagus."},
-        {jp:"ミラーさんはもうかえったでしょう。",rom:"Mirā-san wa mō kaetta deshō.",note:"Miller kemungkinan sudah pulang."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕あした・あめ（かもしれない）→あしたはあめかもしれません。",qs:[
-        {q:"かれ・きょう・こない（かもしれない）",a:"かれはきょうこないかもしれません。",rom:"Kare wa kyō konai kamo shiremasen."},
-        {q:"このしけん・むずかしい（かもしれない）",a:"このしけんはむずかしいかもしれません。",rom:"Kono shiken wa muzukashii kamo shiremasen."},
-      ]},
-      {num:"2",prompt:"〔れい〕あした・いいてんき（でしょう）→あしたはいいてんきでしょう。",qs:[
-        {q:"ミラーさん・もうかえった（でしょう）",a:"ミラーさんはもうかえったでしょう。",rom:"Mirā-san wa mō kaetta deshō."},
-        {q:"かれ・にほんご・じょうず（でしょう）",a:"かれはにほんごがじょうずでしょう。",rom:"Kare wa Nihongo ga jōzu deshō."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menebak situasi",lines:[
-        {sp:"A",jp:"ミラーさんはどこにいるとおもいますか。",rom:"Mirā-san wa doko ni iru to omoimasu ka.",id:"Menurut Anda Miller ada di mana?"},
-        {sp:"B",jp:"かいぎしつにいるかもしれません。",rom:"Kaigishitsu ni iru kamo shiremasen.",id:"Mungkin ada di ruang rapat."},
-        {sp:"A",jp:"もうかえったかもしれませんね。",rom:"Mō kaetta kamo shiremasen ne.",id:"Mungkin sudah pulang ya."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih yang tepat untuk 'mungkin saja'.",q:"あしたあめ（　）しれません。",opts:["かも","でも","かな","のかな"],ans:"かも"},
-      {type:"fill",instruction:"Isi dengan tepat.",q:"あしたはいいてんき（　　　）。（kemungkinan besar)",ans:"でしょう"},
-      {type:"choice",instruction:"Mana yang mengungkapkan ketidakpastian lebih besar?",q:"より不確か：",opts:["かもしれません","でしょう","とおもいます","にちがいありません"],ans:"かもしれません"},
-    ]},
-  ]
-},
-
-// ─── BAB 23 ─────────────────────────────────────
-23:{
-  title:"〜が、〜 / 〜から、〜",jp:"逆接・理由の接続詞",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"〜が、〜。（tapi/namun）",rows:[
-        {jp:"このりょうりはおいしいですが、たかいです。",rom:"Kono ryōri wa oishii desu ga, takai desu.",note:"Masakan ini enak, tapi mahal."},
-        {jp:"にほんごはむずかしいですが、おもしろいです。",rom:"Nihongo wa muzukashii desu ga, omoshiroi desu.",note:"Bahasa Jepang susah, tapi menarik."},
-      ]},
-      {formula:"〜から、〜。（karena）",rows:[
-        {jp:"あめがふっていますから、うちにいます。",rom:"Ame ga futte imasu kara, uchi ni imasu.",note:"Karena hujan, saya di rumah."},
-        {jp:"にほんごがすきですから、べんきょうします。",rom:"Nihongo ga suki desu kara, benkyō shimasu.",note:"Karena suka bahasa Jepang, belajar."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕このりょうり・おいしい・たかい →このりょうりはおいしいですが、たかいです。",qs:[
-        {q:"にほんご・むずかしい・おもしろい",a:"にほんごはむずかしいですが、おもしろいです。",rom:"Nihongo wa muzukashii desu ga, omoshiroi desu."},
-        {q:"このへや・せまい・きれい",a:"このへやはせまいですが、きれいです。",rom:"Kono heya wa semai desu ga, kirei desu."},
-      ]},
-      {num:"2",prompt:"〔れい〕あめ・ふっている→うちにいる →あめがふっていますから、うちにいます。",qs:[
-        {q:"あたまがいたい・かいしゃをやすむ",a:"あたまがいたいですから、かいしゃをやすみます。",rom:"Atama ga itai desu kara, kaisha o yasumimasu."},
-        {q:"にほんごがすき・べんきょうする",a:"にほんごがすきですから、べんきょうします。",rom:"Nihongo ga suki desu kara, benkyō shimasu."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menjelaskan alasan",lines:[
-        {sp:"A",jp:"なぜにほんへきましたか。",rom:"Naze Nihon e kimashita ka.",id:"Mengapa datang ke Jepang?"},
-        {sp:"B",jp:"にほんごがすきですから、べんきょうしたかったです。",rom:"Nihongo ga suki desu kara, benkyō shitakatta desu.",id:"Karena suka bahasa Jepang, ingin belajar."},
-        {sp:"A",jp:"にほんごはむずかしいですが、たのしいですか。",rom:"Nihongo wa muzukashii desu ga, tanoshii desu ka.",id:"Bahasa Jepang susah, tapi menyenangkan?"},
-        {sp:"B",jp:"はい、とてもたのしいです。",rom:"Hai, totemo tanoshii desu.",id:"Ya, sangat menyenangkan."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih yang tepat untuk 'tapi'.",q:"このほんはむずかしいです（　）、おもしろいです。",opts:["が","から","し","けど"],ans:"が"},
-      {type:"fill",instruction:"Isi penghubung alasan.",q:"あめがふっています（　）、うちにいます。",ans:"から"},
-      {type:"choice",instruction:"Pilih urutan yang tepat untuk から.",q:"〜から、〜 berarti:",opts:["alasan dulu, hasil kemudian","hasil dulu, alasan kemudian","dua hal yang kontras","dua hal yang setara"],ans:"alasan dulu, hasil kemudian"},
-    ]},
-  ]
-},
-
-// ─── BAB 24 ─────────────────────────────────────
-24:{
-  title:"〜てあげます・〜てもらいます・〜てくれます",jp:"授受表現",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"〜て あげます（memberi tindakan ke orang lain）",rows:[
-        {jp:"わたしはミラーさんにほんをおしえてあげました。",rom:"Watashi wa Mirā-san ni Nihongo o oshiete agemashita.",note:"Saya mengajari Miller bahasa Jepang."},
-        {jp:"ともだちのかばんをもってあげました。",rom:"Tomodachi no kaban o motte agemashita.",note:"Saya membawakan tas teman."},
-      ]},
-      {formula:"〜て もらいます（menerima tindakan dari orang lain）",rows:[
-        {jp:"わたしはミラーさんにえいごをおしえてもらいました。",rom:"Watashi wa Mirā-san ni Eigo o oshiete moraimashita.",note:"Saya diajarkan bahasa Inggris oleh Miller."},
-      ]},
-      {formula:"〜て くれます（orang lain memberi tindakan ke saya）",rows:[
-        {jp:"ミラーさんはわたしにえいごをおしえてくれました。",rom:"Mirā-san wa watashi ni Eigo o oshiete kuremashita.",note:"Miller mengajari saya bahasa Inggris."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕ミラーさん→にほんご・おしえる →わたしはミラーさんにほんごをおしえてあげました。",qs:[
-        {q:"ともだち→かばん・もつ",a:"ともだちのかばんをもってあげました。",rom:"Tomodachi no kaban o motte agemashita."},
-        {q:"たなかさん→えいご・おしえる（もらう）",a:"たなかさんにえいごをおしえてもらいました。",rom:"Tanaka-san ni Eigo o oshiete moraimashita."},
-        {q:"ミラーさん→えいご・おしえる（くれる）",a:"ミラーさんはわたしにえいごをおしえてくれました。",rom:"Mirā-san wa watashi ni Eigo o oshiete kuremashita."},
-      ]},
-      {num:"2",prompt:"〔れい〕駅まで車で送ってあげた→えきまでくるまでおくってあげました。",qs:[
-        {q:"写真を撮ってもらった（ミラーさん）",a:"ミラーさんにしゃしんをとってもらいました。",rom:"Mirā-san ni shashin o totte moraimashita."},
-        {q:"荷物を持ってくれた（田中さん）",a:"たなかさんはにもつをもってくれました。",rom:"Tanaka-san wa nimotsu o motte kuremashita."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menceritakan bantuan yang diterima",lines:[
-        {sp:"A",jp:"きのうミラーさんにえいごをおしえてもらいました。",rom:"Kinō Mirā-san ni Eigo o oshiete moraimashita.",id:"Kemarin saya diajarkan bahasa Inggris oleh Miller."},
-        {sp:"B",jp:"そうですか。ミラーさんはしんせつですね。",rom:"Sō desu ka. Mirā-san wa shinsetsu desu ne.",id:"Begitu ya. Miller baik ya."},
-        {sp:"A",jp:"わたしもたなかさんにほんごをおしえてあげました。",rom:"Watashi mo Tanaka-san ni Nihongo o oshiete agemashita.",id:"Saya juga mengajari Tanaka bahasa Jepang."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih yang tepat saat Anda memberi tindakan ke orang lain.",q:"わたしはミラーさんにほんごをおしえ（　）。",opts:["てあげました","てもらいました","てくれました","ていました"],ans:"てあげました"},
-      {type:"choice",instruction:"Pilih yang tepat saat Anda menerima tindakan dari orang lain.",q:"わたしはミラーさんにえいごをおしえ（　）。",opts:["てもらいました","てあげました","てくれました","ていました"],ans:"てもらいました"},
-      {type:"fill",instruction:"Lengkapi dari perspektif orang yang memberi.",q:"ミラーさんはわたしにえいごをおしえて（　）。",ans:"くれました"},
-    ]},
-  ]
-},
-
-// ─── BAB 25 ─────────────────────────────────────
-25:{
-  title:"〜ようにします・〜ようになります",jp:"変化・目標",
-  sections:[
-    {type:"A",title:"練習 A",items:[
-      {formula:"〜ように します。（berusaha agar…）",rows:[
-        {jp:"まいにちべんきょうするようにしています。",rom:"Mainichi benkyō suru yō ni shite imasu.",note:"Saya berusaha belajar setiap hari."},
-        {jp:"やさいをたべるようにしてください。",rom:"Yasai o taberu yō ni shite kudasai.",note:"Tolong usahakan makan sayuran."},
-      ]},
-      {formula:"〜ように なります。（menjadi bisa / berubah jadi…）",rows:[
-        {jp:"にほんごがはなせるようになりました。",rom:"Nihongo ga hanaseru yō ni narimashita.",note:"Sudah bisa berbicara bahasa Jepang."},
-        {jp:"およげるようになりたいです。",rom:"Oyogeru yō ni naritai desu.",note:"Ingin bisa berenang."},
-      ]},
-    ]},
-    {type:"B",title:"練習 B",items:[
-      {num:"1",prompt:"〔れい〕まいにちべんきょうする →まいにちべんきょうするようにしています。",qs:[
-        {q:"やさいをたべる",a:"やさいをたべるようにしています。",rom:"Yasai o taberu yō ni shite imasu."},
-        {q:"はやくおきる",a:"はやくおきるようにしています。",rom:"Hayaku okiru yō ni shite imasu."},
-        {q:"たばこをすわない",a:"たばこをすわないようにしています。",rom:"Tabako o suwanai yō ni shite imasu."},
-      ]},
-      {num:"2",prompt:"〔れい〕にほんごがはなせる →にほんごがはなせるようになりました。",qs:[
-        {q:"かんじがかける（なりたい）",a:"かんじがかけるようになりたいです。",rom:"Kanji ga kakeru yō ni naritai desu."},
-        {q:"じてんしゃにのれる（なった）",a:"じてんしゃにのれるようになりました。",rom:"Jitensha ni noreru yō ni narimashita."},
-        {q:"およげる（なりたい）",a:"およげるようになりたいです。",rom:"Oyogeru yō ni naritai desu."},
-      ]},
-      {num:"3",prompt:"〔れい〕せんせい→がくせい→まいにちれんしゅうするようにいいました →せんせいはがくせいにまいにちれんしゅうするようにいいました。",qs:[
-        {q:"おいしゃ→わたし→やさいをたべるようにいった",a:"おいしゃはわたしにやさいをたべるようにいいました。",rom:"Oisha wa watashi ni yasai o taberu yō ni iimashita."},
-      ]},
-    ]},
-    {type:"C",title:"練習 C",items:[
-      {scene:"Menceritakan perubahan kemampuan",lines:[
-        {sp:"A",jp:"にほんごがじょうずになりましたね。",rom:"Nihongo ga jōzu ni narimashita ne.",id:"Bahasa Jepangmu sudah jago ya."},
-        {sp:"B",jp:"ありがとうございます。まいにちべんきょうするようにしています。",rom:"Arigatō gozaimasu. Mainichi benkyō suru yō ni shite imasu.",id:"Terima kasih. Saya berusaha belajar setiap hari."},
-        {sp:"A",jp:"かんじもかけるようになりましたか。",rom:"Kanji mo kakeru yō ni narimashita ka.",id:"Sudah bisa nulis kanji juga?"},
-        {sp:"B",jp:"すこしだけ。もっとかけるようになりたいです。",rom:"Sukoshi dake. Motto kakeru yō ni naritai desu.",id:"Sedikit saja. Ingin bisa nulis lebih banyak."},
-      ]},
-    ]},
-    {type:"M",title:"問題",items:[
-      {type:"choice",instruction:"Pilih yang tepat untuk 'berusaha'.",q:"まいにちべんきょうする（　）にしています。",opts:["よう","こと","ため","ところ"],ans:"よう"},
-      {type:"choice",instruction:"Pilih yang tepat untuk perubahan kemampuan.",q:"にほんごがはなせる（　）になりました。",opts:["よう","こと","ため","ところ"],ans:"よう"},
-      {type:"fill",instruction:"Lengkapi kalimat.",q:"かんじがかける（　）になりたいです。",ans:"よう"},
-      {type:"choice",instruction:"Perbedaan ようにします vs ようになります?",q:"ようにします menyatakan:",opts:["usaha/tujuan","perubahan yang sudah terjadi","kemampuan saat ini","larangan"],ans:"usaha/tujuan"},
-    ]},
-  ]
-},
+11:{title:"いくつ ありますか",jp:"数え方・数量",sections:[{type:"A",title:"練習 A",items:[{formula:"[物] が [数量] あります／います。",rows:[{jp:"りんごが3つあります。",rom:"Ringo ga mittsu arimasu.",note:"Ada 3 apel."},{jp:"ねこが2ひきいます。",rom:"Neko ga ni-hiki imasu.",note:"Ada 2 ekor kucing."},{jp:"いすがいくつありますか。",rom:"Isu ga ikutsu arimasu ka.",note:"Ada berapa kursi?"}]},{formula:"助数詞まとめ",rows:[{jp:"1こ・2こ・3こ（個）",rom:"ikko, niko, sanko",note:"benda kecil bulat"},{jp:"1まい・2まい（枚）",rom:"ichimai, nimai",note:"benda tipis/lembaran"},{jp:"1ほん・2ほん（本）",rom:"ippon, nihon",note:"benda panjang"},{jp:"1ひき・2ひき（匹）",rom:"ippiki, nihiki",note:"hewan kecil"},{jp:"1とう・2とう（頭）",rom:"ittō, nitō",note:"hewan besar"},{jp:"1だい・2だい（台）",rom:"ichidai, nidai",note:"mesin/kendaraan"}]}]},{type:"B",title:"練習 B",items:[{num:"1",prompt:"〔れい〕いす・いくつ →いすがいくつありますか。……ひとつあります。",qs:[{q:"たまご・いくつ（4つ）",a:"たまごがいくつありますか。……よっつあります。",rom:"Tamago ga ikutsu arimasu ka? Yottsu arimasu."},{q:"かばん・いくつ（2つ）",a:"かばんがいくつありますか。……ふたつあります。",rom:"Kaban ga ikutsu arimasu ka? Futatsu arimasu."},{q:"かぎ・いくつ（7つ）",a:"かぎがいくつありますか。……ななつあります。",rom:"Kagi ga ikutsu arimasu ka? Nanatsu arimasu."}]},{num:"2",prompt:"〔れい〕CD・なんまい →CDがなんまいありますか。……5まいあります。",qs:[{q:"コンピューター・なんだい（3台）",a:"コンピューターがなんだいありますか。……3だいあります。",rom:"Konpyūtā ga nan-dai arimasu ka? San-dai arimasu."},{q:"ふうとう・なんまい（2枚）",a:"ふうとうがなんまいありますか。……2まいあります。",rom:"Fūtō ga nan-mai arimasu ka? Ni-mai arimasu."},{q:"じどうしゃ・なんだい（5台）",a:"じどうしゃがなんだいありますか。……5だいあります。",rom:"Jidōsha ga nan-dai arimasu ka? Go-dai arimasu."}]},{num:"3",prompt:"〔れい〕がいこくじんのしゃいん・なんにん →がいこくじんのしゃいんがなんにんいますか。……2にんいます。",qs:[{q:"おんなのひと・なんにん（6人）",a:"おんなのひとがなんにんいますか。……6にんいます。",rom:"Onna no hito ga nan-nin imasu ka? Roku-nin imasu."},{q:"ねこ・なんびき（3匹）",a:"ねこがなんびきいますか。……3びきいます。",rom:"Neko ga nan-biki imasu ka? San-biki imasu."}]}]},{type:"C",title:"練習 C",items:[{scene:"Di toko buah — membeli apel",lines:[{sp:"A",jp:"りんごはいくつありますか。",rom:"Ringo wa ikutsu arimasu ka.",id:"Ada berapa apel?"},{sp:"B",jp:"10こあります。",rom:"Jikko arimasu.",id:"Ada 10 buah."},{sp:"A",jp:"5つください。いくらですか。",rom:"Itsutsu kudasai. Ikura desu ka.",id:"Tolong 5 buah. Berapa harganya?"},{sp:"B",jp:"1こ100えんで、500えんです。",rom:"Ikko hyaku-en de, go-hyaku-en desu.",id:"1 buah 100 yen, jadi 500 yen."}]}]},{type:"M",title:"問題",items:[{type:"choice",instruction:"Pilih penghitung yang tepat untuk anjing.",q:"いぬが2（　）います。",opts:["ひき","とう","まい","だい"],ans:"ひき"},{type:"choice",instruction:"Pilih penghitung yang tepat untuk pensil.",q:"えんぴつが3（　）あります。",opts:["ほん","まい","こ","だい"],ans:"ほん"},{type:"fill",instruction:"Isi kata tanya yang tepat.",q:"いすが（　）ありますか。（menanyakan jumlah kursi）",ans:"いくつ"},{type:"fill",instruction:"Isi dengan benar.",q:"ねこが（　）いますか。（berapa ekor）",ans:"なんびき"}]}]},
 
 }; // end allRenshuu
 
 // ═══════════════ SETUP ═══════════════
 let isDark=false, currentBab=1, currentType='all', searchQ='';
-let scores = {}; // {babN_secType_qIdx: 'correct'|'wrong'}
 
 function toggleTheme(){
   isDark=!isDark;
@@ -1442,7 +840,6 @@ function render(){
     return '';
   }).join('');
 
-  // count
   secs.forEach(s=>{
     if(s.type==='B') s.items.forEach(g=>totalQ+=g.qs.length);
     if(s.type==='M') totalQ+=s.items.length;
@@ -1450,6 +847,7 @@ function render(){
   document.getElementById('count').textContent=(totalQ>0?totalQ+' soal':secs.length+' bagian');
 }
 
+// ── RENDER A — with interactive translation reveal ──
 function renderA(sec,si){
   const pats=sec.items.map((pat,pi)=>`
     <div class="ra-pattern">
@@ -1459,7 +857,11 @@ function renderA(sec,si){
           <td class="ra-num">${String(ri+1).padStart(2,'0')}</td>
           <td class="cell-jp">${r.jp}</td>
           <td class="cell-rom">${r.rom}</td>
-          <td style="font-size:0.75rem;color:var(--text3);">${r.note}</td>
+          <td class="cell-trans">
+            <button class="trans-reveal-btn" onclick="revealTrans(this,'${escQ(r.note)}')">
+              👁 Lihat arti
+            </button>
+          </td>
         </tr>`).join('')}</table>
     </div>`).join('');
   return `<div class="section" style="animation-delay:${si*0.05}s">
@@ -1470,30 +872,33 @@ function renderA(sec,si){
         <span class="section-title">${sec.title}</span>
       </div>
       <div class="renshuu-a-wrap">
-        <p class="ra-desc">Pola kalimat — substitusi dan hafalan</p>
+        <p class="ra-desc">Klik <b>Lihat arti</b> untuk menampilkan terjemahan Bahasa Indonesia</p>
         ${pats}
       </div>
     </div>
   </div>`;
 }
 
+// ── RENDER B — with Indonesian labels + "Contoh" for れい ──
 function renderB(sec,si){
   const groups=sec.items.map((g,gi)=>{
     const qsHTML=g.qs.map((q,qi)=>{
       const uid=`b${currentBab}_${si}_${gi}_${qi}`;
       return `<div class="rb-item">
-        <div class="rb-num">れい ${g.num} — 問 ${qi+1}</div>
+        <div class="rb-num">Soal ${qi+1}</div>
         <div class="rb-prompt">${q.q}</div>
         <div class="rb-answer-row">
-          <input class="rb-input" id="inp_${uid}" type="text" placeholder="答えを入力...">
-          <button class="rb-check" onclick="checkB('${uid}','${escQ(q.a)}')">確認</button>
-          <button class="rb-reveal" onclick="revealB('${uid}','${escQ(q.a)}','${escQ(q.rom)}')">答え</button>
+          <input class="rb-input" id="inp_${uid}" type="text" placeholder="Tulis jawabanmu...">
+          <button class="rb-check" onclick="checkB('${uid}','${escQ(q.a)}')">Cek</button>
+          <button class="rb-reveal" onclick="revealB('${uid}','${escQ(q.a)}','${escQ(q.rom)}')">Jawaban</button>
         </div>
         <div class="rb-feedback" id="fb_${uid}"></div>
       </div>`;
     }).join('');
     return `<div style="border-bottom:2px solid var(--border);padding-bottom:4px;margin-bottom:4px;">
-      <div style="padding:8px 16px 4px;font-size:0.75rem;font-weight:700;color:var(--text3);font-family:'JetBrains Mono',monospace;">れい ${g.num}</div>
+      <div style="padding:8px 16px 4px;display:flex;align-items:center;gap:8px;">
+        <span class="rei-label">れい ${g.num} <span style="font-size:0.55rem;opacity:0.7">= Contoh ${g.num}</span></span>
+      </div>
       <div style="padding:4px 16px 8px;font-size:0.82rem;color:var(--text2);font-family:'Noto Serif JP',serif;background:var(--red-light);border-left:3px solid var(--red);">${g.prompt}</div>
       ${qsHTML}
     </div>`;
@@ -1510,15 +915,20 @@ function renderB(sec,si){
   </div>`;
 }
 
+// ── RENDER C — same interactive reveal as A ──
 function renderC(sec,si){
   const items=sec.items.map((item,ii)=>{
     const lines=item.lines.map(l=>`
       <div class="rc-line">
         <span class="rc-speaker ${l.sp==='A'?'rc-sp-A':'rc-sp-B'}">${l.sp}</span>
-        <div>
+        <div style="flex:1;">
           <div class="rc-text">${l.jp}</div>
           <div class="rc-rom">${l.rom}</div>
-          <div class="rc-id">${l.id}</div>
+          <div class="rc-id-wrap">
+            <button class="trans-reveal-btn" onclick="revealTrans(this,'${escQ(l.id)}')">
+              👁 Lihat arti
+            </button>
+          </div>
         </div>
       </div>`).join('');
     return `<div class="rc-item">
@@ -1533,7 +943,9 @@ function renderC(sec,si){
         <span class="section-type-badge badge-C">練習 C</span>
         <span class="section-title">${sec.title}</span>
       </div>
-      <div class="rc-list">${items}</div>
+      <div class="rc-list">${items}
+        <p style="font-size:0.72rem;color:var(--text4);text-align:center;padding:8px 0;font-style:italic;">Klik 👁 Lihat arti untuk menampilkan terjemahan Bahasa Indonesia</p>
+      </div>
     </div>
   </div>`;
 }
@@ -1548,13 +960,13 @@ function renderM(sec,si){
       inner=`<div class="mondai-options">${opts}</div>`;
     } else {
       inner=`<div class="mondai-fill-row">
-        <input class="mondai-fill" id="inp_${uid}" type="text" placeholder="こたえ...">
-        <button class="mondai-check-btn" onclick="checkFill('${uid}','${escQ(item.ans)}')">確認</button>
-        <button class="rb-reveal" style="height:36px;padding:0 12px;" onclick="revealFill('${uid}','${escQ(item.ans)}')">答え</button>
+        <input class="mondai-fill" id="inp_${uid}" type="text" placeholder="Tulis jawaban...">
+        <button class="mondai-check-btn" onclick="checkFill('${uid}','${escQ(item.ans)}')">Cek</button>
+        <button class="rb-reveal" style="height:36px;padding:0 12px;" onclick="revealFill('${uid}','${escQ(item.ans)}')">Jawaban</button>
       </div>`;
     }
     return `<div class="mondai-item">
-      <div class="mondai-q-num">問 ${qi+1}</div>
+      <div class="mondai-q-num">Soal ${qi+1}</div>
       <div class="mondai-instruction">${item.instruction}</div>
       <div class="mondai-q">${item.q}</div>
       ${inner}
@@ -1575,8 +987,13 @@ function renderM(sec,si){
 
 // ─── INTERACTIVE ──────────────────────────────────
 function escQ(s){return(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
-
 function normalize(s){return(s||'').trim().replace(/　/g,' ').toLowerCase();}
+
+// Toggle translation reveal for A and C
+function revealTrans(btn, text){
+  const cell = btn.parentElement;
+  cell.innerHTML = `<span class="trans-text">🇮🇩 ${text}</span>`;
+}
 
 function checkB(uid,ans){
   const inp=document.getElementById('inp_'+uid);
@@ -1584,12 +1001,11 @@ function checkB(uid,ans){
   if(!inp)return;
   const val=normalize(inp.value);
   const correct=normalize(ans);
-  // flexible: check if main answer is included
   const mainAns=correct.split('……')[1]||correct;
   const ok=val===normalize(mainAns)||val===correct||correct.includes(val)&&val.length>2;
   inp.className='rb-input '+(ok?'correct':'wrong');
   fb.className='rb-feedback '+(ok?'ok':'ng');
-  fb.innerHTML=ok?'✓ 正解！':'✗ もう一度。<span class="ans">答え: '+ans+'</span>';
+  fb.innerHTML=ok?'✓ Benar! Bagus!':'✗ Coba lagi. <span class="ans">Jawaban: '+ans+'</span>';
 }
 
 function revealB(uid,ans,rom){
@@ -1598,7 +1014,7 @@ function revealB(uid,ans,rom){
   if(!inp)return;
   inp.className='rb-input';
   fb.className='rb-feedback ng';
-  fb.innerHTML='答え: <span class="ans">'+ans+'</span> <span style="font-family:monospace;font-size:0.6rem;color:var(--accent)">'+rom+'</span>';
+  fb.innerHTML='Jawaban: <span class="ans">'+ans+'</span> <span style="font-family:monospace;font-size:0.6rem;color:var(--accent)">'+rom+'</span>';
 }
 
 function checkChoice(uid,selected,ans,total){
@@ -1614,7 +1030,7 @@ function checkChoice(uid,selected,ans,total){
     else if(normalize(btn.textContent)===selNorm&&!ok) btn.classList.add('wrong');
   }
   fb.className='mondai-feedback '+(ok?'ok':'ng');
-  fb.innerHTML=ok?'✓ 正解！':'✗ 正解は: <span class="ans">'+ans+'</span>';
+  fb.innerHTML=ok?'✓ Benar!':'✗ Jawaban benar: <span class="ans">'+ans+'</span>';
 }
 
 function checkFill(uid,ans){
@@ -1626,7 +1042,7 @@ function checkFill(uid,ans){
   const ok=val===correct||(correct.includes('、')&&correct.split('、').every((p,i)=>val.includes(normalize(p))));
   inp.className='mondai-fill '+(ok?'correct':'wrong');
   fb.className='mondai-feedback '+(ok?'ok':'ng');
-  fb.innerHTML=ok?'✓ 正解！':'✗ 答え: <span class="ans">'+ans+'</span>';
+  fb.innerHTML=ok?'✓ Benar!':'✗ Jawaban: <span class="ans">'+ans+'</span>';
 }
 
 function revealFill(uid,ans){
@@ -1636,7 +1052,7 @@ function revealFill(uid,ans){
   inp.value=ans;
   inp.className='mondai-fill correct';
   fb.className='mondai-feedback ok';
-  fb.innerHTML='答え: <span class="ans">'+ans+'</span>';
+  fb.innerHTML='Jawaban: <span class="ans">'+ans+'</span>';
 }
 
 render();
