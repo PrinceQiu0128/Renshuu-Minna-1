@@ -83,6 +83,8 @@
   .badge-B{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent);}
   .badge-C{background:var(--green-light);color:#15803d;border:1px solid #22c55e;}
   .badge-M{background:var(--amber-light);color:#b45309;border:1px solid var(--amber);}
+  .badge-BK{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple);}
+  .badge-RF{background:var(--accent2-light);color:var(--accent2);border:1px solid var(--accent2);}
   .section-title{font-size:0.84rem;font-weight:700;color:var(--text);flex:1;}
 
   /* ── RENSHUU A ── */
@@ -173,6 +175,25 @@
   .mondai-feedback.ng{background:#fee2e2;color:#dc2626;display:block;}
   .mondai-feedback .ans{font-family:'Noto Serif JP',serif;font-size:0.85rem;}
 
+  /* ── BUNKEI 文型 ── */
+  .bk-wrap{padding:12px 14px;}
+  .bk-item{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+  .bk-item:last-child{margin-bottom:0;}
+  .bk-num{font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text4);margin-bottom:4px;letter-spacing:0.08em;}
+  .bk-pattern{font-family:'Noto Serif JP',serif;font-size:1.05rem;font-weight:500;color:var(--text);line-height:1.7;margin-bottom:4px;}
+  .bk-pattern .bk-slot{color:var(--red);font-weight:700;}
+  .bk-note{font-size:0.72rem;color:var(--text3);font-style:italic;}
+
+  /* ── REIBUN 例文 ── */
+  .rf-wrap{padding:12px 14px;}
+  .rf-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+  .rf-item:last-child{border-bottom:none;}
+  .rf-num{font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text4);width:20px;flex-shrink:0;padding-top:3px;text-align:right;}
+  .rf-body{flex:1;}
+  .rf-jp{font-family:'Noto Serif JP',serif;font-size:0.9rem;color:var(--text);line-height:1.65;}
+  .rf-rom{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--accent);font-style:italic;margin-top:1px;}
+  .rf-id-wrap{margin-top:3px;}
+
   mark{background:rgba(212,35,26,0.2);color:inherit;border-radius:2px;padding:0 1px;}
   .empty-state{text-align:center;padding:2.5rem 1rem;color:var(--text3);font-size:0.9rem;}
   .empty-state .big{font-family:'Noto Serif JP',serif;font-size:2.5rem;display:block;opacity:0.2;margin-bottom:0.5rem;}
@@ -203,6 +224,8 @@
   </div>
   <div class="type-tabs">
     <button class="type-tab active" data-type="all" onclick="switchType('all')"><span class="tab-dot"></span>Semua</button>
+    <button class="type-tab" data-type="BK" onclick="switchType('BK')"><span class="tab-dot"></span>文型</button>
+    <button class="type-tab" data-type="RF" onclick="switchType('RF')"><span class="tab-dot"></span>例文</button>
     <button class="type-tab" data-type="A" onclick="switchType('A')"><span class="tab-dot"></span>練習 A</button>
     <button class="type-tab" data-type="B" onclick="switchType('B')"><span class="tab-dot"></span>練習 B</button>
     <button class="type-tab" data-type="C" onclick="switchType('C')"><span class="tab-dot"></span>練習 C</button>
@@ -229,7 +252,281 @@
 //  DATA LENGKAP — BAB 1–25
 //  Format れい: {num, reiJp, reiId, qs:[{q,a,rom}]}
 // ══════════════════════════════════════════════════════════════
-const allRenshuu = {
+// ═══════════════════════════════════════════════════════════════
+//  DATA 文型 (BUNKEI) & 例文 (REIBUN) — BAB 1–25
+// ═══════════════════════════════════════════════════════════════
+const bunkeiData = {
+  1:[
+    {pattern:"[名前]は [名詞]です。",note:"N1 adalah N2"},
+    {pattern:"[名前]は [名詞]ではありません。",note:"N1 bukan N2"},
+    {pattern:"[名前]は [名詞]ですか。",note:"Apakah N1 adalah N2?"},
+    {pattern:"[名前]の [名詞]",note:"Kepemilikan / keterangan N"},
+  ],
+  2:[
+    {pattern:"これ／それ／あれ は [名詞]です。",note:"Ini/Itu adalah N"},
+    {pattern:"この／その／あの [名詞] は [名詞]です。",note:"N ini/itu adalah N"},
+    {pattern:"[名詞] は [名詞]の です。",note:"N adalah milik N"},
+    {pattern:"[名詞] は なんですか。",note:"N itu apa?"},
+  ],
+  3:[
+    {pattern:"ここ／そこ／あそこ は [場所]です。",note:"Di sini/situ/sana adalah tempat"},
+    {pattern:"[場所] は どこ／どちら ですか。",note:"N ada di mana?"},
+    {pattern:"[名詞] は [場所] です。",note:"N ada di (tempat)"},
+  ],
+  4:[
+    {pattern:"いま [時刻] です。",note:"Sekarang jam ..."},
+    {pattern:"[施設] は [時刻] から [時刻] まで です。",note:"... buka dari jam ... sampai jam ..."},
+    {pattern:"[時刻] に [動詞] ます。",note:"(Melakukan) pada jam ..."},
+  ],
+  5:[
+    {pattern:"[人] は [場所] へ いきます／きます／かえります。",note:"Pergi ke / Datang ke / Pulang ke"},
+    {pattern:"[人] は [乗り物] で いきます。",note:"Pergi dengan (kendaraan)"},
+    {pattern:"[人] は [人] と いきます。",note:"Pergi bersama (orang)"},
+    {pattern:"[人] は ひとりで いきます。",note:"Pergi seorang diri"},
+  ],
+  6:[
+    {pattern:"[人] は [物] を [動詞] ます。",note:"(Orang) melakukan (aksi) terhadap (benda)"},
+    {pattern:"[場所] で [物] を [動詞] ます。",note:"Melakukan di (tempat)"},
+    {pattern:"[人] に あいます。",note:"Bertemu dengan (orang) — partikel に"},
+  ],
+  7:[
+    {pattern:"[物] を ください。",note:"Tolong beri (benda)"},
+    {pattern:"[物] を [数量] ください。",note:"Tolong beri (benda) sejumlah (satuan)"},
+    {pattern:"[物] は いくらですか。",note:"(Benda) harganya berapa?"},
+    {pattern:"[物] を [数量] と [物] を [数量] ください。",note:"Tolong beri ... dan ..."},
+  ],
+  8:[
+    {pattern:"[場所] に [物／人] が あります／います。",note:"Di (tempat) ada (benda/orang)"},
+    {pattern:"[物／人] は [場所] に あります／います。",note:"(Benda/orang) ada di (tempat)"},
+    {pattern:"[場所] の [位置] に あります／います。",note:"Ada di (posisi) dari (tempat) — うえ/した/まえ/うしろ/となり/なか/そと"},
+  ],
+  9:[
+    {pattern:"[人] は [名詞] が すきです／きらいです。",note:"(Orang) suka/tidak suka (N)"},
+    {pattern:"[人] は [名詞] が じょうずです／へたです。",note:"(Orang) pandai/tidak pandai (N)"},
+    {pattern:"どんな [名詞] が すきですか。",note:"(N) seperti apa yang kamu suka?"},
+  ],
+  10:[
+    {pattern:"[場所] が あります。",note:"Ada (tempat/benda) — keberadaan"},
+    {pattern:"[数量] あります／います。",note:"Ada sejumlah ..."},
+    {pattern:"[物] が [数量] あります。",note:"(Benda) ada sejumlah (satuan hitung)"},
+  ],
+  11:[
+    {pattern:"[物] が [数量] あります／います。",note:"Ada (benda) sejumlah (satuan hitung)"},
+    {pattern:"[数量] の [物] があります。",note:"Ada (satuan hitung) buah/ekor (benda)"},
+  ],
+  12:[
+    {pattern:"[人] は [時間] に [動詞] ます。",note:"(Orang) melakukan pada jam/waktu (N に)"},
+    {pattern:"[場所] から [場所] まで [時間] かかります。",note:"Dari ... ke ... memakan waktu ..."},
+    {pattern:"どのくらい かかりますか。",note:"Berapa lama?"},
+  ],
+  13:[
+    {pattern:"[場所] で [動詞] ます。（活動の場所）",note:"Melakukan di (tempat) — partikel で"},
+    {pattern:"[場所] へ [動詞ます形] に いきます。（目的）",note:"Pergi ke (tempat) untuk melakukan"},
+    {pattern:"[場所] へ [名詞] に いきます。（目的）",note:"Pergi ke (tempat) untuk (tujuan)"},
+  ],
+  14:[
+    {pattern:"[動詞て形] ください。",note:"Tolong lakukan ..."},
+    {pattern:"[動詞て形] もいいですか。",note:"Boleh melakukan ...?"},
+    {pattern:"いいですよ。／すみません、ちょっと…",note:"Boleh. / Maaf, hmm..."},
+    {pattern:"[動詞て形] は いけません。",note:"Tidak boleh / Dilarang melakukan ..."},
+  ],
+  15:[
+    {pattern:"[動詞ない形] なくては いけません。",note:"Harus melakukan ..."},
+    {pattern:"[動詞ない形] なくても いいです。",note:"Tidak perlu melakukan ..."},
+    {pattern:"[動詞て形] は いけません。",note:"Dilarang melakukan ..."},
+  ],
+  16:[
+    {pattern:"[人] は [名詞] が ほしいです。",note:"(Orang) ingin (benda)"},
+    {pattern:"[人] は [動詞ます形] たいです。",note:"(Orang) ingin melakukan ..."},
+    {pattern:"[人] は [場所] へ [動詞ます形] に いきたいです。",note:"(Orang) ingin pergi ke ... untuk ..."},
+  ],
+  17:[
+    {pattern:"[動詞て形]、[動詞て形]、[動詞] ます。",note:"Melakukan A, lalu B, lalu C (urutan)"},
+    {pattern:"[動詞て形] から、[動詞] ます。",note:"Setelah melakukan A, baru B"},
+    {pattern:"[動詞た形] り [動詞た形] り します。",note:"Melakukan A dan B dan sebagainya"},
+  ],
+  18:[
+    {pattern:"[動詞て形] います。（動作の継続）",note:"Sedang melakukan ... (aksi berlanjut)"},
+    {pattern:"[動詞て形] います。（状態の継続）",note:"Dalam kondisi ... (sudah terjadi, hasilnya masih ada)"},
+    {pattern:"もう [動詞て形] います。",note:"Sudah ... (kondisi sekarang)"},
+  ],
+  19:[
+    {pattern:"[動詞て形] みます。",note:"Mencoba melakukan ..."},
+    {pattern:"[動詞て形] おきます。",note:"Melakukan lebih dulu (persiapan)"},
+    {pattern:"[動詞て形] しまいます。",note:"Melakukan sampai selesai / menyesal"},
+  ],
+  20:[
+    {pattern:"〜し、〜し、〜です。",note:"... dan ..., jadi ...（menyebut banyak alasan）"},
+    {pattern:"〜し、それに〜。",note:"... dan selain itu ..."},
+    {pattern:"どうして／なぜ 〜んですか。",note:"Mengapa ...? (meminta penjelasan)"},
+  ],
+  21:[
+    {pattern:"〜と おもいます。",note:"Saya pikir / menurut saya ..."},
+    {pattern:"〜と おもいません。",note:"Saya tidak pikir ..."},
+    {pattern:"〜と いいました。",note:"(Seseorang) bilang bahwa ..."},
+    {pattern:"どう おもいますか。",note:"Menurut Anda bagaimana?"},
+  ],
+  22:[
+    {pattern:"〜かもしれません。",note:"Mungkin saja ... (ketidakpastian tinggi)"},
+    {pattern:"〜でしょう。",note:"Kemungkinan besar ... (perkiraan)"},
+    {pattern:"〜でしょうか。",note:"Kira-kira ...? (pertanyaan perkiraan)"},
+  ],
+  23:[
+    {pattern:"〜が、〜。",note:"..., tapi ... (kontras)"},
+    {pattern:"〜から、〜。",note:"Karena ..., maka ... (alasan dulu)"},
+    {pattern:"〜ので、〜。",note:"Karena ... (lebih sopan dari から)"},
+  ],
+  24:[
+    {pattern:"[人A] は [人B] に [動詞て形] あげます。",note:"A melakukan untuk B (A memberi aksi ke B)"},
+    {pattern:"[人A] は [人B] に [動詞て形] もらいます。",note:"A menerima aksi dari B (A meminta/menerima dari B)"},
+    {pattern:"[人B] は [人A] に [動詞て形] くれます。",note:"B melakukan untuk A (B memberi aksi ke A)"},
+  ],
+  25:[
+    {pattern:"〜ように します。",note:"Berusaha agar ... / Mengusahakan supaya ..."},
+    {pattern:"〜ように なります。",note:"Jadi bisa ... / Berubah menjadi ..."},
+    {pattern:"〜ように いいます。",note:"Menyuruh agar ... / Berpesan supaya ..."},
+  ],
+};
+
+const reibunData = {
+  1:[
+    {jp:"わたしはミラーです。",rom:"Watashi wa Mirā desu.",id:"Saya (adalah) Miller."},
+    {jp:"ミラーさんはIMCのしゃいんです。",rom:"Mirā-san wa IMC no shain desu.",id:"Miller adalah karyawan IMC."},
+    {jp:"さとうさんはせんせいではありません。",rom:"Satō-san wa sensei dewa arimasen.",id:"Sato bukan guru."},
+    {jp:"ミラーさんはにほんじんですか。　いいえ、にほんじんではありません。アメリカじんです。",rom:"Mirā-san wa Nihonjin desu ka? Iie, Nihonjin dewa arimasen. Amerikajin desu.",id:"Apakah Miller orang Jepang? Bukan, dia bukan orang Jepang. Dia orang Amerika."},
+    {jp:"シュミットさんはどちらのかたですか。　ドイツのBMWのしゃいんです。",rom:"Shumitto-san wa dochira no kata desu ka? Doitsu no BMW no shain desu.",id:"Bapak Schmidt berasal dari mana? Beliau karyawan BMW Jerman."},
+  ],
+  2:[
+    {jp:"これはなんですか。　カメラです。",rom:"Kore wa nan desu ka? Kamera desu.",id:"Ini apa? Kamera."},
+    {jp:"それはわたしのかばんです。",rom:"Sore wa watashi no kaban desu.",id:"Itu tas saya."},
+    {jp:"このほんはだれのですか。　ミラーさんのです。",rom:"Kono hon wa dare no desu ka? Mirā-san no desu.",id:"Buku ini milik siapa? Milik Miller."},
+    {jp:"これはじしょですか、ノートですか。　ノートです。",rom:"Kore wa jisho desu ka, nōto desu ka? Nōto desu.",id:"Ini kamus atau buku catatan? Buku catatan."},
+  ],
+  3:[
+    {jp:"トイレはどこですか。　あそこです。",rom:"Toire wa doko desu ka? Asoko desu.",id:"Toilet ada di mana? Di sana."},
+    {jp:"エレベーターはそこです。",rom:"Erebētā wa soko desu.",id:"Lift ada di situ."},
+    {jp:"かいしゃはどちらですか。　パワーでんきです。",rom:"Kaisha wa dochira desu ka? Pawā Denki desu.",id:"Perusahaan Anda di mana? Power Electric."},
+    {jp:"ネクタイうりばはなんかいですか。　6かいです。",rom:"Nekutai uriba wa nan-kai desu ka? Roku-kai desu.",id:"Konter dasi ada di lantai berapa? Lantai 6."},
+  ],
+  4:[
+    {jp:"いまなんじですか。　くじじゅっぷんです。",rom:"Ima nanji desu ka? Ku-ji juppun desu.",id:"Sekarang jam berapa? Jam 9 lebih 10 menit."},
+    {jp:"ぎんこうはくじからさんじまでです。",rom:"Ginkō wa ku-ji kara san-ji made desu.",id:"Bank buka dari jam 9 sampai jam 3."},
+    {jp:"デパートはなんじからなんじまでですか。",rom:"Depāto wa nanji kara nanji made desu ka.",id:"Toserba buka dari jam berapa sampai berapa?"},
+  ],
+  5:[
+    {jp:"わたしはスーパーへいきます。",rom:"Watashi wa sūpā e ikimasu.",id:"Saya pergi ke supermarket."},
+    {jp:"せんげつ　どこへいきましたか。　アメリカへいきました。",rom:"Sengetsu doko e ikimashita ka? Amerika e ikimashita.",id:"Bulan lalu pergi ke mana? Pergi ke Amerika."},
+    {jp:"なんでいきましたか。　しんかんせんでいきました。",rom:"Nande ikimashita ka? Shinkansen de ikimashita.",id:"Naik apa? Naik shinkansen."},
+    {jp:"だれといきましたか。　かぞくといきました。",rom:"Dare to ikimashita ka? Kazoku to ikimashita.",id:"Dengan siapa? Dengan keluarga."},
+  ],
+  6:[
+    {jp:"わたしはまいにちコーヒーをのみます。",rom:"Watashi wa mainichi kōhī o nomimasu.",id:"Saya minum kopi setiap hari."},
+    {jp:"えいがをみたり、かいものをしたりします。",rom:"Eiga o mitari, kaimono o shitari shimasu.",id:"Nonton film, belanja, dan sebagainya."},
+    {jp:"しゅうまつなにをしましたか。　ともだちとテニスをしました。",rom:"Shūmatsu nani o shimashita ka? Tomodachi to tenisu o shimashita.",id:"Akhir pekan ngapain? Main tenis dengan teman."},
+  ],
+  7:[
+    {jp:"80えんのきってを3まいください。",rom:"Hachijū-en no kitte o san-mai kudasai.",id:"Tolong 3 lembar perangko 80 yen."},
+    {jp:"このセーターはいくらですか。　3000えんです。",rom:"Kono sētā wa ikura desu ka? Sanzen-en desu.",id:"Sweater ini harganya berapa? 3000 yen."},
+    {jp:"りんごを5つとオレンジを3つください。",rom:"Ringo o itsutsu to orenji o mittsu kudasai.",id:"Tolong 5 apel dan 3 jeruk."},
+  ],
+  8:[
+    {jp:"つくえのうえにほんがあります。",rom:"Tsukue no ue ni hon ga arimasu.",id:"Di atas meja ada buku."},
+    {jp:"こうえんにこどもがいます。",rom:"Kōen ni kodomo ga imasu.",id:"Di taman ada anak-anak."},
+    {jp:"ねこはソファーのしたにいます。",rom:"Neko wa sofā no shita ni imasu.",id:"Kucing ada di bawah sofa."},
+    {jp:"ぎんこうはデパートとポストのあいだにあります。",rom:"Ginkō wa depāto to posuto no aida ni arimasu.",id:"Bank ada di antara toserba dan kotak surat."},
+  ],
+  9:[
+    {jp:"わたしはやきゅうがすきです。",rom:"Watashi wa yakyū ga suki desu.",id:"Saya suka baseball."},
+    {jp:"わたしはさかながきらいです。",rom:"Watashi wa sakana ga kirai desu.",id:"Saya tidak suka ikan."},
+    {jp:"ミラーさんはりょうりがじょうずです。",rom:"Mirā-san wa ryōri ga jōzu desu.",id:"Miller pandai memasak."},
+    {jp:"どんなおんがくがすきですか。　クラシックがすきです。",rom:"Donna ongaku ga suki desu ka? Kurashikku ga suki desu.",id:"Suka musik apa? Suka musik klasik."},
+  ],
+  10:[
+    {jp:"えきのちかくにぎんこうがあります。",rom:"Eki no chikaku ni ginkō ga arimasu.",id:"Di dekat stasiun ada bank."},
+    {jp:"このへやにはテーブルが1つあります。",rom:"Kono heya ni wa tēburu ga hitotsu arimasu.",id:"Di ruangan ini ada 1 meja."},
+  ],
+  11:[
+    {jp:"りんごが5つあります。",rom:"Ringo ga itsutsu arimasu.",id:"Ada 5 buah apel."},
+    {jp:"いぬが2ひきいます。",rom:"Inu ga ni-hiki imasu.",id:"Ada 2 ekor anjing."},
+    {jp:"えんぴつが3ほんあります。",rom:"Enpitsu ga san-bon arimasu.",id:"Ada 3 buah pensil."},
+  ],
+  12:[
+    {jp:"わたしはまいあさ6じにおきます。",rom:"Watashi wa maiasa roku-ji ni okimasu.",id:"Saya bangun jam 6 setiap pagi."},
+    {jp:"12じにひるごはんをたべます。",rom:"Jūni-ji ni hirugohan o tabemasu.",id:"Makan siang jam 12."},
+    {jp:"うちからがっこうまで30ぷんかかります。",rom:"Uchi kara gakkō made sanjuppun kakarimasu.",id:"Dari rumah ke sekolah 30 menit."},
+  ],
+  13:[
+    {jp:"としょかんでほんをよみます。",rom:"Toshokan de hon o yomimasu.",id:"Membaca buku di perpustakaan."},
+    {jp:"どこでひるごはんをたべますか。　えきのちかくでたべます。",rom:"Doko de hirugohan o tabemasu ka? Eki no chikaku de tabemasu.",id:"Di mana makan siang? Di dekat stasiun."},
+    {jp:"デパートへかいものにいきます。",rom:"Depāto e kaimono ni ikimasu.",id:"Pergi ke toserba untuk belanja."},
+  ],
+  14:[
+    {jp:"ちょっとまってください。",rom:"Chotto matte kudasai.",id:"Tolong tunggu sebentar."},
+    {jp:"ゆっくりはなしてください。",rom:"Yukkuri hanashite kudasai.",id:"Tolong bicara pelan-pelan."},
+    {jp:"まどをあけてもいいですか。　はい、どうぞ。",rom:"Mado o akete mo ii desu ka? Hai, dōzo.",id:"Boleh buka jendela? Ya, silakan."},
+    {jp:"ここでたばこをすってはいけません。",rom:"Koko de tabako o sutte wa ikemasen.",id:"Dilarang merokok di sini."},
+  ],
+  15:[
+    {jp:"くすりをのまなくてはいけません。",rom:"Kusuri o nomanakute wa ikemasen.",id:"Harus minum obat."},
+    {jp:"きょうはかいしゃにいかなくてもいいです。",rom:"Kyō wa kaisha ni ikanakute mo ii desu.",id:"Hari ini tidak perlu ke kantor."},
+    {jp:"としょかんでたべてはいけません。",rom:"Toshokan de tabete wa ikemasen.",id:"Dilarang makan di perpustakaan."},
+  ],
+  16:[
+    {jp:"わたしはあたらしいパソコンがほしいです。",rom:"Watashi wa atarashii pasokon ga hoshii desu.",id:"Saya ingin laptop baru."},
+    {jp:"わたしはハワイへいきたいです。",rom:"Watashi wa Hawai e ikitai desu.",id:"Saya ingin pergi ke Hawaii."},
+    {jp:"おすしがたべたいです。",rom:"Osushi ga tabetai desu.",id:"Ingin makan sushi."},
+    {jp:"どこへいきたいですか。　ハワイへいきたいです。",rom:"Doko e ikitai desu ka? Hawai e ikitai desu.",id:"Ingin pergi ke mana? Ingin pergi ke Hawaii."},
+  ],
+  17:[
+    {jp:"おきて、シャワーをあびて、かいしゃへいきます。",rom:"Okite, shawā o abite, kaisha e ikimasu.",id:"Bangun, mandi, lalu pergi ke kantor."},
+    {jp:"ごはんをたべてから、にほんごをべんきょうします。",rom:"Gohan o tabete kara, Nihongo o benkyō shimasu.",id:"Setelah makan, belajar bahasa Jepang."},
+    {jp:"しゅうまつはえいがをみたり、かいものをしたりします。",rom:"Shūmatsu wa eiga o mitari, kaimono o shitari shimasu.",id:"Akhir pekan nonton film, belanja, dan sebagainya."},
+  ],
+  18:[
+    {jp:"ミラーさんはいまでんわをかけています。",rom:"Mirā-san wa ima denwa o kakete imasu.",id:"Miller sekarang sedang telepon."},
+    {jp:"たなかさんはもうけっこんしています。",rom:"Tanaka-san wa mō kekkon shite imasu.",id:"Tanaka sudah menikah."},
+    {jp:"わたしはパワーでんきにつとめています。",rom:"Watashi wa Pawā Denki ni tsutomete imasu.",id:"Saya bekerja di Power Electric."},
+  ],
+  19:[
+    {jp:"このりょうりをたべてみます。",rom:"Kono ryōri o tabete mimasu.",id:"Saya akan mencoba makan masakan ini."},
+    {jp:"かいぎのまえにしりょうをよんでおきます。",rom:"Kaigi no mae ni shiryō o yonde okimasu.",id:"Saya akan membaca materi sebelum rapat."},
+    {jp:"さいふをわすれてしまいました。",rom:"Saifu o wasurete shimaimashita.",id:"Saya lupa (membawa) dompet."},
+  ],
+  20:[
+    {jp:"このホテルはやすいし、きれいだし、いいです。",rom:"Kono hoteru wa yasui shi, kirei da shi, ii desu.",id:"Hotel ini murah, bersih, bagus."},
+    {jp:"このまちはしずかだし、それに、べんりです。",rom:"Kono machi wa shizuka da shi, sore ni, benri desu.",id:"Kota ini tenang, dan selain itu nyaman."},
+    {jp:"なぜにほんごをべんきょうしますか。　おもしろいし、べんりですから。",rom:"Naze Nihongo o benkyō shimasu ka? Omoshiroi shi, benri desu kara.",id:"Mengapa belajar bahasa Jepang? Karena menarik dan berguna."},
+  ],
+  21:[
+    {jp:"あしたあめがふるとおもいます。",rom:"Ashita ame ga furu to omoimasu.",id:"Saya pikir besok akan hujan."},
+    {jp:"このしごとはむずかしいとおもいます。",rom:"Kono shigoto wa muzukashii to omoimasu.",id:"Saya pikir pekerjaan ini sulit."},
+    {jp:"せんせいはあしたテストがあるといいました。",rom:"Sensei wa ashita tesuto ga aru to iimashita.",id:"Guru bilang besok ada tes."},
+    {jp:"あなたはどうおもいますか。",rom:"Anata wa dō omoimasu ka.",id:"Menurut Anda bagaimana?"},
+  ],
+  22:[
+    {jp:"あしたあめかもしれません。",rom:"Ashita ame kamo shiremasen.",id:"Besok mungkin hujan."},
+    {jp:"ミラーさんはきょうこないかもしれません。",rom:"Mirā-san wa kyō konai kamo shiremasen.",id:"Miller mungkin tidak datang hari ini."},
+    {jp:"あしたはいいてんきでしょう。",rom:"Ashita wa ii tenki deshō.",id:"Besok cuaca kemungkinan bagus."},
+  ],
+  23:[
+    {jp:"このりょうりはおいしいですが、たかいです。",rom:"Kono ryōri wa oishii desu ga, takai desu.",id:"Masakan ini enak, tapi mahal."},
+    {jp:"にほんごはむずかしいですが、おもしろいです。",rom:"Nihongo wa muzukashii desu ga, omoshiroi desu.",id:"Bahasa Jepang susah, tapi menarik."},
+    {jp:"あめがふっていますから、うちにいます。",rom:"Ame ga futte imasu kara, uchi ni imasu.",id:"Karena hujan, saya di rumah."},
+    {jp:"にほんごがすきですから、べんきょうします。",rom:"Nihongo ga suki desu kara, benkyō shimasu.",id:"Karena suka bahasa Jepang, belajar."},
+  ],
+  24:[
+    {jp:"わたしはミラーさんにほんごをおしえてあげました。",rom:"Watashi wa Mirā-san ni Nihongo o oshiete agemashita.",id:"Saya mengajari Miller bahasa Jepang."},
+    {jp:"わたしはミラーさんにえいごをおしえてもらいました。",rom:"Watashi wa Mirā-san ni Eigo o oshiete moraimashita.",id:"Saya diajarkan bahasa Inggris oleh Miller."},
+    {jp:"ミラーさんはわたしにえいごをおしえてくれました。",rom:"Mirā-san wa watashi ni Eigo o oshiete kuremashita.",id:"Miller mengajari saya bahasa Inggris."},
+  ],
+  25:[
+    {jp:"まいにちべんきょうするようにしています。",rom:"Mainichi benkyō suru yō ni shite imasu.",id:"Saya berusaha belajar setiap hari."},
+    {jp:"にほんごがはなせるようになりました。",rom:"Nihongo ga hanaseru yō ni narimashita.",id:"Sudah bisa berbicara bahasa Jepang."},
+    {jp:"せんせいはがくせいにまいにちれんしゅうするようにいいました。",rom:"Sensei wa gakusei ni mainichi renshū suru yō ni iimashita.",id:"Guru menyuruh murid agar berlatih setiap hari."},
+    {jp:"やさいをたべるようにしてください。",rom:"Yasai o taberu yō ni shite kudasai.",id:"Tolong usahakan makan sayuran."},
+  ],
+};
+
 
 // ───────────────────────────────────────────────────────────────
 // BAB 1  わたしは〜です
@@ -1624,12 +1921,36 @@ function render(){
   const bab=allRenshuu[currentBab];
   const el=document.getElementById('renshuuSections');
   const empty=document.getElementById('emptyState');
+
+  // BK & RF hanya butuh data bunkei/reibun, bukan allRenshuu
+  if(currentType==='BK'||currentType==='RF'){
+    const hasData=(currentType==='BK'&&bunkeiData[currentBab])||(currentType==='RF'&&reibunData[currentBab]);
+    if(!hasData){el.innerHTML='';empty.style.display='block';document.getElementById('count').textContent='—';return;}
+    empty.style.display='none';
+    const html=currentType==='BK'?renderBK(0):renderRF(0);
+    el.innerHTML=html||'';
+    if(!html){empty.style.display='block';}
+    const cnt=currentType==='BK'?(bunkeiData[currentBab]||[]).length:(reibunData[currentBab]||[]).length;
+    document.getElementById('count').textContent=cnt+' item';
+    return;
+  }
+
   if(!bab){el.innerHTML='';empty.style.display='block';document.getElementById('count').textContent='—';return;}
   const secs=bab.sections.filter(s=>currentType==='all'||s.type===currentType);
-  if(!secs.length){el.innerHTML='';empty.style.display='block';document.getElementById('count').textContent='0';return;}
+  if(!secs.length&&currentType!=='all'){el.innerHTML='';empty.style.display='block';document.getElementById('count').textContent='0';return;}
+
+  // For 'all', prepend BK and RF if data exists
+  let extraHTML='';
+  if(currentType==='all'){
+    const bkHTML=renderBK(-2);
+    const rfHTML=renderRF(-1);
+    extraHTML=(bkHTML||'')+(rfHTML||'');
+  }
+
+  if(!secs.length&&!extraHTML){el.innerHTML='';empty.style.display='block';document.getElementById('count').textContent='0';return;}
   empty.style.display='none';
   let totalQ=0;
-  el.innerHTML=secs.map((sec,si)=>{
+  el.innerHTML=extraHTML+secs.map((sec,si)=>{
     if(sec.type==='A') return renderA(sec,si);
     if(sec.type==='B') return renderB(sec,si);
     if(sec.type==='C') return renderC(sec,si);
@@ -1641,6 +1962,55 @@ function render(){
     if(s.type==='M') totalQ+=s.items.length;
   });
   document.getElementById('count').textContent=totalQ>0?totalQ+' soal':secs.length+' bagian';
+}
+
+// ── RENDER BK (文型) ──
+function renderBK(si){
+  const items=bunkeiData[currentBab];
+  if(!items||!items.length) return '';
+  const rows=items.map((item,i)=>`
+    <div class="bk-item">
+      <div class="bk-num">文型 ${String(i+1).padStart(2,'0')}</div>
+      <div class="bk-pattern">${item.pattern.replace(/\[([^\]]+)\]/g,'<span class="bk-slot">[$1]</span>').replace(/〜/g,'<span class="bk-slot">〜</span>')}</div>
+      <div class="bk-note">📌 ${item.note}</div>
+    </div>`).join('');
+  return `<div class="section" style="animation-delay:${si*0.05}s">
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-bab">Bab ${currentBab}</span>
+        <span class="section-type-badge badge-BK">文型</span>
+        <span class="section-title">Bunkei — pola kalimat utama bab ini</span>
+      </div>
+      <div class="bk-wrap">${rows}</div>
+    </div>
+  </div>`;
+}
+
+// ── RENDER RF (例文) ──
+function renderRF(si){
+  const items=reibunData[currentBab];
+  if(!items||!items.length) return '';
+  const rows=items.map((item,i)=>`
+    <div class="rf-item">
+      <div class="rf-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="rf-body">
+        <div class="rf-jp">${item.jp}</div>
+        <div class="rf-rom">${item.rom}</div>
+        <div class="rf-id-wrap">
+          <button class="trans-reveal-btn" onclick="revealTrans(this,'${escQ(item.id)}')">👁 Lihat arti</button>
+        </div>
+      </div>
+    </div>`).join('');
+  return `<div class="section" style="animation-delay:${si*0.05}s">
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-bab">Bab ${currentBab}</span>
+        <span class="section-type-badge badge-RF">例文</span>
+        <span class="section-title">Reibun — kalimat contoh · klik 👁 untuk lihat arti</span>
+      </div>
+      <div class="rf-wrap">${rows}</div>
+    </div>
+  </div>`;
 }
 
 // ── RENDER A ──
